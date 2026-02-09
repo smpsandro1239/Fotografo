@@ -153,13 +153,13 @@ Deves:
 
 - [ ] Criar estrutura base do repositório (backend, frontend, mobile, docs)  
 - [ ] Criar `README.md` inicial com descrição do projeto e stack  
-- [ ] Configurar ambiente do backend (NestJS + Prisma + PostgreSQL)  
+- [✅] Configurar ambiente do backend (NestJS + Prisma + PostgreSQL)
 - [ ] Configurar ambiente do frontend (Next.js + Tailwind + shadcn/ui)  
 - [ ] Configurar ambiente da app mobile (Expo + React Native)  
 
 ### 5.2. Backend — Fundações
 
-- [ ] Configurar Prisma e schema inicial (users, photographers, events, albums, photos, packs, vehicles, reservations, orders, payments, stats, notifications)  
+- [✅] Configurar Prisma e schema inicial (users, photographers, events, albums, photos, packs, vehicles, reservations, orders, payments, stats, notifications)
 - [ ] Implementar módulo `Auth` (registo, login, refresh, logout)  
 - [ ] Implementar módulo `Users` (perfil, atualização)  
 - [ ] Implementar módulo `Photographers` (perfil profissional)  
