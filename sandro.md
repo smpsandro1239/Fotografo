@@ -151,11 +151,11 @@ Deves:
 
 ### 5.1. Setup inicial
 
-- [ ] Criar estrutura base do repositório (backend, frontend, mobile, docs)  
-- [ ] Criar `README.md` inicial com descrição do projeto e stack  
+- [✅] Criar estrutura base do repositório (backend, frontend, mobile, docs)
+- [✅] Criar `README.md` inicial com descrição do projeto e stack
 - [✅] Configurar ambiente do backend (NestJS + Prisma + PostgreSQL)
-- [ ] Configurar ambiente do frontend (Next.js + Tailwind + shadcn/ui)  
-- [ ] Configurar ambiente da app mobile (Expo + React Native)  
+- [✅] Configurar ambiente do frontend (Next.js + Tailwind + shadcn/ui)
+- [✅] Configurar ambiente da app mobile (Expo + React Native)
 
 ### 5.2. Backend — Fundações
 
