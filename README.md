@@ -91,8 +91,8 @@ O desenvolvimento segue as instruções definidas no ficheiro `sandro.md`, que c
 # 🟦 **BACKEND — PRINTS**
 
 ## 📌 Swagger / OpenAPI
-- [ ] Print 1 — Lista de endpoints  
-- [ ] Print 2 — Endpoint de autenticação  
+- [✅] Print 1 — Lista de endpoints
+- [✅] Print 2 — Endpoint de autenticação (ver docs/prints/swagger_auth.png)
 - [ ] Print 3 — Endpoint de upload de fotos  
 - [ ] Print 4 — Endpoint de reservas  
 - [ ] Print 5 — Endpoint de pagamentos  
