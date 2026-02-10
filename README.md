@@ -93,6 +93,7 @@ O desenvolvimento segue as instruções definidas no ficheiro `sandro.md`, que c
 ## 📌 Swagger / OpenAPI
 - [✅] Print 1 — Lista de endpoints
 - [✅] Print 2 — Endpoint de autenticação (ver docs/prints/swagger_auth.png)
+- [✅] Print 2.1 — Endpoint de fotógrafos (ver docs/prints/swagger_photographers.png)
 - [ ] Print 3 — Endpoint de upload de fotos  
 - [ ] Print 4 — Endpoint de reservas  
 - [ ] Print 5 — Endpoint de pagamentos  
