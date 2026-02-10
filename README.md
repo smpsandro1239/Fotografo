@@ -1,5 +1,3 @@
-📘 README.md — Versão Inicial
-markdown
 # 📸 Plataforma Premium para Fotógrafos  
 ### Desenvolvido por **Sandro Pereira**
 
@@ -64,14 +62,12 @@ Criar a plataforma mais completa, moderna e premium para fotógrafos de eventos,
 
 # 📂 Estrutura do Repositório
 
-/backend
-/frontend
-/mobile
-/docs
-sandro.md
-README.md
-
-Código
+- `/backend`: Core API e Lógica de Negócio
+- `/frontend`: Interface Web (Next.js)
+- `/mobile`: Aplicação Mobile (Expo)
+- `/docs`: Documentação Adicional
+- `sandro.md`: Fonte de Verdade e ToDo List
+- `README.md`: Este ficheiro
 
 ---
 
@@ -95,15 +91,15 @@ O desenvolvimento segue as instruções definidas no ficheiro `sandro.md`, que c
 # 🟦 **BACKEND — PRINTS**
 
 ## 📌 Swagger / OpenAPI
-- [ ] Print 1 — Lista de endpoints  
-- [ ] Print 2 — Endpoint de autenticação  
+- [✅] Print 1 — Lista de endpoints
+- [✅] Print 2 — Endpoint de autenticação (ver docs/prints/swagger_auth.png)
 - [ ] Print 3 — Endpoint de upload de fotos  
 - [ ] Print 4 — Endpoint de reservas  
 - [ ] Print 5 — Endpoint de pagamentos  
 - [ ] Print 6 — Endpoint de estatísticas  
 
 ## 📌 Base de Dados (Prisma Studio)
-- [ ] Print 7 — Tabela Users  
+- [✅] Print 7 — Tabela Users (ver docs/prints/swagger_users.png)
 - [ ] Print 8 — Tabela Events  
 - [ ] Print 9 — Tabela Photos  
 - [ ] Print 10 — Tabela Reservations  
@@ -192,44 +188,48 @@ cp .env.example .env
 yarn install
 yarn prisma migrate dev
 yarn start:dev
-Frontend
-bash
+```
+
+## **Frontend**
+```bash
 cd frontend
 cp .env.example .env
 yarn install
 yarn dev
-Mobile
-bash
+```
+
+## **Mobile**
+```bash
 cd mobile
 cp .env.example .env
 yarn install
 expo start
-🧪 Testes
-Unitários: Jest
+```
 
-Integração: Prisma + Testcontainers
+---
 
-E2E API: Supertest
+# 🧪 Testes
 
-E2E Frontend: Playwright
+- **Unitários:** Jest
+- **Integração:** Prisma + Testcontainers
+- **E2E API:** Supertest
+- **E2E Frontend:** Playwright
+- **E2E Mobile:** Detox
 
-E2E Mobile: Detox
+---
 
-📌 Estado do Projeto
-(Atualizado automaticamente durante o desenvolvimento)
+# 📌 Estado do Projeto
+*(Atualizado automaticamente durante o desenvolvimento)*
 
-Estrutura inicial: ❌
+- Estrutura inicial: ✅
+- Backend configurado: ✅
+- Frontend configurado: ✅
+- Mobile configurado: ✅
+- CI/CD: ❌
+- Deploy: ❌
 
-Backend configurado: ❌
+---
 
-Frontend configurado: ❌
-
-Mobile configurado: ❌
-
-CI/CD: ❌
-
-Deploy: ❌
-
-👤 Autor
-Sandro Pereira  
+# 👤 Autor
+**Sandro Pereira**
 Criador e proprietário do projeto.
