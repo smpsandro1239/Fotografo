@@ -167,8 +167,8 @@ Deves:
 - [✅] Implementar módulo `Albums` (CRUD)
 - [✅] Implementar módulo `Photos` (upload, metadados, proteção, signed URLs)
 - [✅] Integrar Cloudflare R2/Images para armazenamento de fotos
-- [ ] Implementar módulo `Packs` (CRUD + associação a veículos)  
-- [ ] Implementar módulo `Vehicles` (CRUD + disponibilidade)  
+- [✅] Implementar módulo `Packs` (CRUD + associação a veículos)
+- [✅] Implementar módulo `Vehicles` (CRUD + disponibilidade)
 - [ ] Implementar módulo `Reservations` (criar, atualizar, cancelar)  
 - [ ] Integrar Stripe para pagamentos (reservas + encomendas)  
 - [ ] Implementar módulo `Orders` (carrinho, encomendas, estados)  
