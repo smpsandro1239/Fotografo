@@ -11,9 +11,10 @@ import { PhotosModule } from './photos/photos.module';
 import { StorageModule } from './storage/storage.module';
 import { PacksModule } from './packs/packs.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
+import { ReservationsModule } from './reservations/reservations.module';
 
 @Module({
-  imports: [PrismaModule, AuthModule, UsersModule, PhotographersModule, EventsModule, AlbumsModule, PhotosModule, StorageModule, PacksModule, VehiclesModule],
+  imports: [PrismaModule, AuthModule, UsersModule, PhotographersModule, EventsModule, AlbumsModule, PhotosModule, StorageModule, PacksModule, VehiclesModule, ReservationsModule],
   controllers: [AppController],
   providers: [AppService],
 })

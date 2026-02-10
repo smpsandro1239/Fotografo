@@ -169,7 +169,7 @@ Deves:
 - [✅] Integrar Cloudflare R2/Images para armazenamento de fotos
 - [✅] Implementar módulo `Packs` (CRUD + associação a veículos)
 - [✅] Implementar módulo `Vehicles` (CRUD + disponibilidade)
-- [ ] Implementar módulo `Reservations` (criar, atualizar, cancelar)  
+- [✅] Implementar módulo `Reservations` (criar, atualizar, cancelar)
 - [ ] Integrar Stripe para pagamentos (reservas + encomendas)  
 - [ ] Implementar módulo `Orders` (carrinho, encomendas, estados)  
 - [ ] Implementar módulo `Stats` (visualizações, favoritos, relatórios)  
