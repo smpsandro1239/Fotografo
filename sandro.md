@@ -164,7 +164,7 @@ Deves:
 - [✅] Implementar módulo `Users` (perfil, atualização)
 - [✅] Implementar módulo `Photographers` (perfil profissional)
 - [✅] Implementar módulo `Events` (CRUD + publish)
-- [ ] Implementar módulo `Albums` (CRUD)  
+- [✅] Implementar módulo `Albums` (CRUD)
 - [ ] Implementar módulo `Photos` (upload, metadados, proteção, signed URLs)  
 - [ ] Integrar Cloudflare R2/Images para armazenamento de fotos  
 - [ ] Implementar módulo `Packs` (CRUD + associação a veículos)  
