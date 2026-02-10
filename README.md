@@ -101,7 +101,7 @@ O desenvolvimento segue as instruções definidas no ficheiro `sandro.md`, que c
 
 ## 📌 Base de Dados (Prisma Studio)
 - [✅] Print 7 — Tabela Users (ver docs/prints/swagger_users.png)
-- [ ] Print 8 — Tabela Events  
+- [✅] Print 8 — Tabela Events (ver docs/prints/swagger_events.png)
 - [ ] Print 9 — Tabela Photos  
 - [ ] Print 10 — Tabela Reservations  
 
