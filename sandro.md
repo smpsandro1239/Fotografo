@@ -161,7 +161,7 @@ Deves:
 
 - [✅] Configurar Prisma e schema inicial (users, photographers, events, albums, photos, packs, vehicles, reservations, orders, payments, stats, notifications)
 - [✅] Implementar módulo `Auth` (registo, login, refresh, logout)
-- [ ] Implementar módulo `Users` (perfil, atualização)  
+- [✅] Implementar módulo `Users` (perfil, atualização)
 - [ ] Implementar módulo `Photographers` (perfil profissional)  
 - [ ] Implementar módulo `Events` (CRUD + publish)  
 - [ ] Implementar módulo `Albums` (CRUD)  
