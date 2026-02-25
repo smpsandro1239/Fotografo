@@ -93,15 +93,16 @@ O desenvolvimento segue as instruções definidas no ficheiro `sandro.md`, que c
 ## 📌 Swagger / OpenAPI
 - [✅] Print 1 — Lista de endpoints
 - [✅] Print 2 — Endpoint de autenticação (ver docs/prints/swagger_auth.png)
-- [ ] Print 3 — Endpoint de upload de fotos  
-- [ ] Print 4 — Endpoint de reservas  
+- [✅] Print 2.1 — Endpoint de fotógrafos (ver docs/prints/swagger_photographers.png)
+- [✅] Print 3 — Endpoint de upload de fotos (ver docs/prints/swagger_photos.png)
+- [✅] Print 4 — Endpoint de reservas
 - [ ] Print 5 — Endpoint de pagamentos  
 - [ ] Print 6 — Endpoint de estatísticas  
 
 ## 📌 Base de Dados (Prisma Studio)
 - [✅] Print 7 — Tabela Users (ver docs/prints/swagger_users.png)
-- [ ] Print 8 — Tabela Events  
-- [ ] Print 9 — Tabela Photos  
+- [✅] Print 8 — Tabela Events (ver docs/prints/swagger_events.png)
+- [✅] Print 9 — Tabela Albums (ver docs/prints/swagger_albums.png)
 - [ ] Print 10 — Tabela Reservations  
 
 ## 📌 Logs & Monitorização
