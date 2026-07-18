@@ -1,0 +1,15 @@
+export enum OrderItemType {
+  PHOTO = 'PHOTO',
+  ALBUM = 'ALBUM',
+  PACK = 'PACK',
+  PRINT = 'PRINT',
+  DIGITAL_DOWNLOAD = 'DIGITAL_DOWNLOAD',
+}
+
+export enum OrderStatus {
+  PENDING = 'PENDING',
+  PROCESSING = 'PROCESSING',
+  COMPLETED = 'COMPLETED',
+  CANCELLED = 'CANCELLED',
+  SHIPPED = 'SHIPPED',
+}

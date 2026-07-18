@@ -1,0 +1,12 @@
+export enum PaymentType {
+  RESERVATION = 'RESERVATION',
+  ORDER = 'ORDER',
+}
+
+export enum PaymentStatus {
+  SUCCEEDED = 'SUCCEEDED',
+  PENDING = 'PENDING',
+  FAILED = 'FAILED',
+  REFUNDED = 'REFUNDED',
+  PARTIALLY_REFUNDED = 'PARTIALLY_REFUNDED',
+}

@@ -1,0 +1,11 @@
+export enum NotificationType {
+  INFO = 'INFO',
+  SUCCESS = 'SUCCESS',
+  WARNING = 'WARNING',
+  ERROR = 'ERROR',
+  ORDER = 'ORDER',
+  PAYMENT = 'PAYMENT',
+  GALLERY = 'GALLERY',
+  RESERVATION = 'RESERVATION',
+  SYSTEM = 'SYSTEM',
+}
