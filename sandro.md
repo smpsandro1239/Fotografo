@@ -170,50 +170,57 @@ Deves:
 - [✅] Implementar módulo `Packs` (CRUD + associação a veículos)
 - [✅] Implementar módulo `Vehicles` (CRUD + disponibilidade)
 - [✅] Implementar módulo `Reservations` (criar, atualizar, cancelar)
-- [ ] Integrar Stripe para pagamentos (reservas + encomendas)  
-- [ ] Implementar módulo `Orders` (carrinho, encomendas, estados)  
-- [ ] Implementar módulo `Stats` (visualizações, favoritos, relatórios)  
-- [ ] Implementar módulo `Notifications` (internas + email, se aplicável)  
-- [ ] Criar documentação Swagger/OpenAPI atualizada  
+- [✅] **Integrar Stripe para pagamentos (reservas + encomendas)** — Módulo `Payments` completo com PaymentIntent, Webhooks, Refunds
+- [✅] **Implementar módulo `Orders` (carrinho, encomendas, estados)** — CRUD completo, integração Stripe
+- [✅] **Implementar módulo `Stats` (visualizações, favoritos, relatórios)** — Photographer/Event/Photo/Client stats
+- [✅] **Implementar módulo `Notifications` (internas + email via Resend/Nodemailer)** — CRUD, bulk create, mark read
+- [✅] **Criar documentação Swagger/OpenAPI completa** — Tags, BearerAuth, CORS, ValidationPipe
+- [✅] **Testes unitários** — Payments, Orders, Stats, Notifications services
+
+### 5.2.1. Refatoração e Melhorias (FASE 2) ✅ CONCLUÍDA
+- [✅] Schema Prisma refinado — `isActive` no User, OrderItem model, PaymentStatus expandido, NotificationType enum, StatType enum, índices
+- [✅] Guards JWT e Roles — `JwtStrategy` com validação de usuário ativo, `RolesGuard` com decorator `@Roles()`, `CurrentUser` decorator
+- [✅] Storage Service R2 robusto — Validação de mime-type/size, signed URLs com expiração configurável, upload via buffer, metadata, verificação de existência
+- [✅] Prisma indexes — Performance otimizada para queries frequentes
 
 ### 5.3. Frontend — Web (Next.js)
 
-- [ ] Criar layout base (landing + dashboard)  
-- [ ] Implementar páginas públicas (landing, packs, veículos, eventos públicos)  
-- [ ] Implementar autenticação (login, registo, proteção de rotas)  
-- [ ] Implementar dashboard do fotógrafo (eventos, packs, reservas, encomendas, stats)  
-- [ ] Implementar galeria premium (grid, fullscreen, favoritos, seleção)  
-- [ ] Integrar com API para reservas e pagamentos  
-- [ ] Otimizar SEO e performance (SSR/ISR, imagens, caching)  
-- [ ] Atualizar `README.md` com prints das principais páginas  
+- [ ] Criar layout base (landing + dashboard)
+- [ ] Implementar páginas públicas (landing, packs, veículos, eventos públicos)
+- [ ] Implementar autenticação (login, registo, proteção de rotas)
+- [ ] Implementar dashboard do fotógrafo (eventos, packs, reservas, encomendas, stats)
+- [ ] Implementar galeria premium (grid, fullscreen, favoritos, seleção)
+- [ ] Integrar com API para reservas e pagamentos
+- [ ] Otimizar SEO e performance (SSR/ISR, imagens, caching)
+- [ ] Atualizar `README.md` com prints das principais páginas
 
 ### 5.4. App Mobile (Expo)
 
-- [ ] Criar navegação base (auth + main)  
-- [ ] Implementar login e registo  
-- [ ] Implementar lista de eventos do cliente  
-- [ ] Implementar galeria protegida (blur-up, fullscreen, favoritos, seleção)  
-- [ ] Implementar anti‑screenshot nas vistas sensíveis  
-- [ ] Sincronizar favoritos e seleção com backend  
-- [ ] Implementar notificações (se aplicável)  
-- [ ] Atualizar `README.md` com prints da app  
+- [ ] Criar navegação base (auth + main)
+- [ ] Implementar login e registo
+- [ ] Implementar lista de eventos do cliente
+- [ ] Implementar galeria protegida (blur-up, fullscreen, favoritos, seleção)
+- [ ] Implementar anti‑screenshot nas vistas sensíveis
+- [ ] Sincronizar favoritos e seleção com backend
+- [ ] Implementar notificações (se aplicável)
+- [ ] Atualizar `README.md` com prints da app
 
 ### 5.5. DevOps & Qualidade
 
-- [ ] Configurar CI/CD para backend  
-- [ ] Configurar CI/CD para frontend  
-- [ ] Configurar EAS build para mobile  
-- [ ] Configurar monitorização e logs  
-- [ ] Implementar testes unitários (backend + frontend + mobile)  
-- [ ] Implementar testes E2E principais (auth, upload, reservas, pagamentos, galeria)  
-- [ ] Atualizar `README.md` com secção de deploy e links online (assim que existirem)  
+- [ ] Configurar CI/CD para backend
+- [ ] Configurar CI/CD para frontend
+- [ ] Configurar EAS build para mobile
+- [ ] Configurar monitorização e logs
+- [ ] Implementar testes unitários (backend + frontend + mobile)
+- [ ] Implementar testes E2E principais (auth, upload, reservas, pagamentos, galeria)
+- [ ] Atualizar `README.md` com secção de deploy e links online (assim que existirem)
 
 ### 5.6. Documentação & Suporte
 
-- [ ] Manter `sandro.md` sempre alinhado com o estado real do projeto  
-- [ ] Manter `README.md` sempre atualizado com funcionalidades e prints  
-- [ ] Criar secção de “FAQ” no `README.md` (ou docs)  
-- [ ] Documentar fluxos críticos (upload, reservas, pagamentos, galeria protegida)  
+- [ ] Manter `sandro.md` sempre alinhado com o estado real do projeto
+- [ ] Manter `README.md` sempre atualizado com funcionalidades e prints
+- [ ] Criar secção de "FAQ" no `README.md` (ou docs)
+- [ ] Documentar fluxos críticos (upload, reservas, pagamentos, galeria protegida)
 
 ---
 
