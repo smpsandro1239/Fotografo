@@ -12,9 +12,29 @@ import { StorageModule } from './storage/storage.module';
 import { PacksModule } from './packs/packs.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
 import { ReservationsModule } from './reservations/reservations.module';
+import { PaymentsModule } from './payments/payments.module';
+import { OrdersModule } from './orders/orders.module';
+import { StatsModule } from './stats/stats.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
-  imports: [PrismaModule, AuthModule, UsersModule, PhotographersModule, EventsModule, AlbumsModule, PhotosModule, StorageModule, PacksModule, VehiclesModule, ReservationsModule],
+  imports: [
+    PrismaModule,
+    AuthModule,
+    UsersModule,
+    PhotographersModule,
+    EventsModule,
+    AlbumsModule,
+    PhotosModule,
+    StorageModule,
+    PacksModule,
+    VehiclesModule,
+    ReservationsModule,
+    PaymentsModule,
+    OrdersModule,
+    StatsModule,
+    NotificationsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
