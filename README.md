@@ -1,373 +1,251 @@
-# 📸 Plataforma Premium para Fotógrafos  
-### Desenvolvido por **Sandro Pereira**
+# 📸 Plataforma Premium para Fotógrafos
 
-Este repositório contém o código-fonte completo da plataforma SaaS premium para fotógrafos, incluindo:
-
-- **Backend** (NestJS + Prisma + PostgreSQL + Stripe + Cloudflare R2)
-- **Frontend Web** (Next.js 15 + Tailwind v4 + shadcn/ui)
-- **App Mobile** (React Native + Expo 52 + Expo Router)
-- **Infraestrutura DevOps** (CI/CD GitHub Actions, monitorização, logs, segurança)
+SaaS completo para fotógrafos de eventos: gestão de eventos, packs, veículos, reservas com pagamento, galerias protegidas, encomendas de fotos, app mobile para clientes, estatísticas avançadas e notificações.
 
 ---
 
-# 🚀 Objetivo do Projeto
-
-Criar a plataforma mais completa, moderna e premium para fotógrafos de eventos, permitindo:
-
-- Gestão de eventos  
-- Packs e veículos  
-- Reservas com pagamento Stripe  
-- Galerias protegidas com URLs assinadas  
-- Encomendas de fotos com carrinho  
-- App mobile para clientes (galeria, favoritos, seleção)  
-- Estatísticas avançadas (fotógrafo + cliente)  
-- Notificações in-app + email  
-- Experiência de luxo para fotógrafos e clientes  
-
----
-
-# 🧠 Arquitetura Geral
-
-## **Backend**
-- Node.js 22+
-- NestJS 11+
-- Prisma 6+
-- PostgreSQL 16+
-- Stripe API 2024+
-- Cloudflare R2 (S3-compatible)
-
-## **Frontend**
-- Next.js 15 (App Router)
-- React 19
-- TailwindCSS v4
-- shadcn/ui (Radix UI)
-- TanStack React Query v5
-- Zustand v5
-
-## **Mobile**
-- React Native 0.76
-- Expo SDK 52
-- Expo Router 4
-- SecureStore (tokens)
-- TanStack React Query v5
-- Zustand v5
-
-## **Infra**
-- Docker 27+
-- GitHub Actions (3 workflows)
-- EAS Build (Android/iOS)
-- Cloudflare CDN + R2
-
----
-
-# 📂 Estrutura do Repositório
+## 🏗️ Arquitetura
 
 ```
-Fotografo/
-├── backend/                 # NestJS API
-│   ├── src/
-│   │   ├── auth/           # JWT + Passport + bcrypt
-│   │   ├── users/          # Perfil utilizador
-│   │   ├── photographers/  # Perfil fotógrafo
-│   │   ├── events/         # CRUD + publish
-│   │   ├── albums/         # CRUD
-│   │   ├── photos/         # Upload + signed URLs + proteção
-│   │   ├── storage/        # Cloudflare R2 service
-│   │   ├── packs/          # Packs fotográficos
-│   │   ├── vehicles/       # Veículos + disponibilidade
-│   │   ├── reservations/   # CRUD + status + payment
-│   │   ├── payments/       # Stripe PaymentIntents + Webhooks
-│   │   ├── orders/         # Carrinho + encomendas + status
-│   │   ├── stats/          # Views, favoritos, relatórios
-│   │   ├── notifications/  # In-app + conveniência
-│   │   ├── common/         # Guards, decorators, pipes
-│   │   └── prisma/         # PrismaService global
-│   ├── prisma/schema.prisma # 14 models + enums + indexes
-│   └── test/               # Jest unit tests (4 modules)
-├── frontend/               # Next.js 15 App Router
-│   ├── src/
-│   │   ├── app/
-│   │   │   ├── (auth)/login, register
-│   │   │   ├── dashboard/  # Fotógrafo dashboard
-│   │   │   ├── auth/       # Auth pages
-│   │   │   └── page.tsx    # Landing page completa
-│   │   ├── components/ui/  # shadcn/ui components
-│   │   ├── lib/            # api.ts, auth-context, utils, types
-│   │   └── providers.tsx   # React Query + Theme + Toaster
-│   └── tailwind.config.ts  # Design system
-├── mobile/                 # Expo 52 + React Native 0.76
-│   ├── app/                # Expo Router (Stack + Tabs)
-│   │   ├── (auth)/login, register
-│   │   ├── (tabs)/events, gallery, profile
-│   │   └── _layout.tsx
-│   ├── src/
-│   │   ├── screens/        # Auth, Events, Gallery
-│   │   ├── lib/            # api.ts, auth-context, types
-│   │   └── store/auth.ts   # Zustand + SecureStore
-│   └── app.json
-├── .github/workflows/      # CI/CD (backend, frontend, mobile)
-├── docs/prints/            # Screenshots
-├── sandro.md               # Fonte de verdade + ToDo
-├── ANALISE_EXAUSTIVA.md    # Análise técnica completa
-└── README.md
+fotografo/
+├── backend/          # NestJS 11 + Prisma 6 + PostgreSQL + Stripe + Cloudflare R2
+├── frontend/         # Next.js 15 (App Router) + Tailwind v4 + shadcn/ui + Zustand + React Query
+├── mobile/           # Expo 52 (expo-router) + React Native 0.76 + SecureStore
+└── docs/             # Documentação adicional
 ```
 
 ---
 
-# 🧭 Fluxo de Desenvolvimento
+## 🚀 Stack Tecnológica
 
-O desenvolvimento segue as instruções definidas no ficheiro `sandro.md`, que contém:
-
-- Prompt geral do projeto  
-- Regras de trabalho  
-- ToDo List completa (100% ✅)  
-- Prioridades  
-- Estrutura de documentação  
-
----
-
-# 🖼️ PRINTS & DEMONSTRAÇÕES  
+| Camada | Tecnologias |
+|--------|-------------|
+| **Backend** | Node.js 22+, NestJS 11, Prisma 6, PostgreSQL 17, Stripe, Cloudflare R2 (S3), Swagger/OpenAPI |
+| **Frontend** | Next.js 15 (App Router), React 19, Tailwind CSS v4, shadcn/ui, Zustand, TanStack Query, next-themes |
+| **Mobile** | Expo 52 (expo-router), React Native 0.76, React 18, Zustand, TanStack Query, SecureStore |
+| **DevOps** | GitHub Actions (CI/CD), Docker, Vercel (Frontend), EAS Build (Mobile), ESLint, Prettier, Jest |
 
 ---
 
-# 🟦 **BACKEND — PRINTS**
+## ✨ Funcionalidades Principais
 
-## 📌 Swagger / OpenAPI (`/api`)
-- [✅] Print 1 — Lista de endpoints  
-- [✅] Print 2 — Autenticação (`docs/prints/swagger_auth.png`)  
-- [✅] Print 2.1 — Fotógrafos (`docs/prints/swagger_photographers.png`)  
-- [✅] Print 3 — Upload fotos (`docs/prints/swagger_photos.png`)  
-- [✅] Print 4 — Reservas  
-- [✅] Print 5 — **Pagamentos Stripe**  
-- [✅] Print 6 — **Estatísticas**  
-- [✅] Print 7 — **Encomendas**  
-- [✅] Print 8 — **Notificações**  
+### 🎯 Backend (12 Módulos)
+- **Auth** – Registo, login, refresh tokens (JWT + bcrypt), Guards + Roles (ADMIN, PHOTOGRAPHER, CLIENT)
+- **Users / Photographers** – Perfis, CRUD completo
+- **Events / Albums / Photos** – Ciclo de vida completo + upload Cloudflare R2 (signed URLs, validação mime/size, public/private)
+- **Packs / Vehicles** – Packs fotográficos com preços + veículos com disponibilidade
+- **Reservations** – CRUD + estados (PENDING → CONFIRMED/CANCELLED) + pagamentos
+- **Orders** – Carrinho multi-item (fotos/álbuns/packs/prints) + estados + pagamentos
+- **Payments (Stripe)** – PaymentIntents, Checkout Sessions, Webhooks (succeeded/failed/refunded), Reembolsos
+- **Stats** – Views, favoritos, downloads, revenue, conversão, top photos/events
+- **Notifications** – In-app + email (Resend/Nodemailer), bulk create, mark read, unread count
+- **Swagger/OpenAPI** – Documentação completa com tags, Bearer auth, validação
 
-## 📌 Base de Dados (Prisma Studio)
-- [✅] Print 7 — Users (`docs/prints/swagger_users.png`)  
-- [✅] Print 8 — Events (`docs/prints/swagger_events.png`)  
-- [✅] Print 9 — Albums (`docs/prints/swagger_albums.png`)  
-- [✅] Print 10 — **Reservations**  
-- [✅] Print 11 — **Orders + OrderItems**  
-- [✅] Print 12 — **Payments**  
-- [✅] Print 13 — **Stats + Notifications**  
+### 🌐 Frontend (Next.js 15)
+- **Landing Page** – Hero, features, stats, testimonials, CTA, footer
+- **Auth** – Login/Register com react-hook-form + validação, protected routes
+- **Dashboard Fotógrafo** – Sidebar, stats cards, quick actions, eventos recentes
+- **UI Components** – Button, Input, Card, Toast, Avatar, Dialog, etc. (shadcn/ui)
+- **AuthContext (Zustand)** – Login/register/logout/refresh automático, persistência localStorage
+- **API Client** – Axios/TanStack Query com endpoints tipados para todos os módulos
+- **Tailwind v4** – Design system (cores, fonts, animações, dark mode via next-themes)
 
-## 📌 Logs & Monitorização
-- [ ] Print 11 — Logs de requests  
-- [ ] Print 12 — Dashboard Grafana  
-
----
-
-# 🟩 **FRONTEND — PRINTS**
-
-## 📌 Landing Page
-- [✅] Print 1 — Hero + CTA  
-- [✅] Print 2 — Secção Funcionalidades  
-- [✅] Print 3 — Secção App Mobile  
-- [✅] Print 4 — Stats + Testemunhos  
-- [✅] Print 5 — CTA Final + Footer  
-
-## 📌 Autenticação
-- [✅] Print 6 — Login (react-hook-form + validação)  
-- [✅] Print 7 — Registo (nome, email, password, confirm)  
-
-## 📌 Dashboard do Fotógrafo
-- [✅] Print 8 — Overview (stats cards + ações rápidas)  
-- [✅] Print 9 — Eventos (lista + criar + publish)  
-- [✅] Print 10 — Packs + Veículos  
-- [✅] Print 11 — Reservas (pendentes/confirmadas)  
-- [✅] Print 12 — Encomendas  
-- [✅] Print 13 — Estatísticas (período: semana/mês/ano)  
-- [✅] Print 14 — Notificações (sineta + lista)  
-- [✅] Print 15 — Definições / Perfil  
-
-## 📌 Galeria Premium (Cliente)
-- [✅] Print 16 — Grid responsivo + lazy load  
-- [✅] Print 17 — Fullscreen (zoom, navegação teclado)  
-- [✅] Print 18 — Favoritos (coração + sincronização)  
-- [✅] Print 19 — Seleção para encomenda (checkbox + carrinho)  
-- [✅] Print 20 — Checkout Stripe  
+### 📱 Mobile (Expo 52 + expo-router)
+- **Navigation** – Stack (auth) + Tabs (main: Events, Gallery, Profile) + modais
+- **Auth** – Login/Register com SecureStore, auto-check auth on load
+- **Events** – Lista + detalhe + pull-to-refresh + criar evento
+- **Gallery** – Grid 3 colunas, fullscreen, favoritos, seleção multipla, anti-screenshot ready
+- **AuthContext (Zustand + SecureStore)** – Login/register/logout/refresh, auto-restore
+- **API Client** – Typed endpoints para todos os módulos backend
+- **Types** – Tipos TypeScript sincronizados com backend (Prisma ↔ Mobile)
 
 ---
 
-# 🟧 **APP MOBILE — PRINTS**
+## 📦 Instalação Rápida
 
-## 📌 Autenticação
-- [✅] Print 1 — Login (SecureStore + auto-login)  
-- [✅] Print 2 — Registo  
-
-## 📌 Eventos
-- [✅] Print 3 — Lista eventos (pull-to-refresh + FAB criar)  
-- [✅] Print 4 — Detalhe evento (info + álbuns + reservas)  
-
-## 📌 Galeria
-- [✅] Print 5 — Grid 3 colunas (thumbnails otimizados)  
-- [✅] Print 6 — Fullscreen (swipe, zoom, favorito)  
-- [✅] Print 7 — **Anti-screenshot** (FLAG_SECURE Android)  
-- [✅] Print 8 — Favoritos (coração + sync backend)  
-- [✅] Print 9 — Seleção múltipla (modo seleção + contador)  
-
-## 📌 Notificações
-- [✅] Print 10 — Lista notificações (marcar lidas + unread count)  
-
----
-
-# 🔗 LINKS ONLINE  
-*(Serão adicionados assim que existirem deploys.)*
-
-- Produção: `https://fotografo.pt` *(aguarda deploy)*  
-- Staging: `https://staging.fotografo.pt` *(aguarda deploy)*  
-- Documentação API (Swagger): `https://api.fotografo.pt/api` *(aguarda deploy)*  
-
----
-
-# 🛠️ Setup Local
-
-## **Pré-requisitos**
+### Pré-requisitos
 - Node.js 22+
-- Docker 27+ (ou PostgreSQL 16+ local)
-- pnpm / yarn / npm
-- Expo CLI (`npm i -g @expo/cli`)
-- EAS CLI (`npm i -g eas-cli`)
+- PostgreSQL 17+
+- Docker (opcional)
+- Expo CLI (`npm i -g expo-cli`)
+- Stripe CLI (`stripe login`) para webhooks locais
 
----
-
-## **Backend**
+### Backend
 ```bash
 cd backend
-cp .env.example .env
-# Editar .env com DATABASE_URL, JWT_SECRET, STRIPE_*, CLOUDFLARE_*
-pnpm install
-pnpm prisma generate
-pnpm prisma migrate dev
-pnpm start:dev
+cp .env.example .env        # Edite com suas credenciais
+npm install
+npx prisma migrate dev      # Cria tabelas + seed opcional
+npm run start:dev           # http://localhost:3001/api (Swagger)
 ```
-Servidor: `http://localhost:3001` | Swagger: `http://localhost:3001/api`
 
----
-
-## **Frontend**
+### Frontend
 ```bash
 cd frontend
-cp .env.example .env.local
-# NEXT_PUBLIC_API_URL=http://localhost:3001
-# NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
-pnpm install
-pnpm dev
+cp .env.example .env.local  # Edite NEXT_PUBLIC_API_URL
+npm install
+npm run dev                 # http://localhost:3000
 ```
-App: `http://localhost:3000`
 
----
-
-## **Mobile**
+### Mobile
 ```bash
 cd mobile
-cp .env.example .env
-# EXPO_PUBLIC_API_URL=http://localhost:3001
-pnpm install
-pnpm start
-# Ou: pnpm android / pnpm ios
+cp .env.example .env        # Edite EXPO_PUBLIC_API_URL
+npm install
+npx expo start              # QR code no terminal → Expo Go no telemóvel
 ```
 
 ---
 
-## **Docker (opcional - stack completa)**
-```bash
-docker-compose up -d
-# Inclui: postgres, backend, frontend, (mobile via EAS)
+## 🗄️ Schema Prisma (Resumo)
+
+```prisma
+User (ADMIN | PHOTOGRAPHER | CLIENT)
+  ↓ 1:1
+Photographer
+  ↓ 1:N
+Event → Album → Photo (R2 signed URLs, stats)
+  ↓ 1:N
+Reservation (PENDING | CONFIRMED | CANCELLED)
+  ↓ 1:1
+Payment (Stripe PaymentIntent)
+Pack → Vehicle
+Order → OrderItem (PHOTO | ALBUM | PACK | PRINT | DIGITAL_DOWNLOAD)
+  ↓ 1:1
+Payment
+Stat (VIEW | FAVORITE | DOWNLOAD | SHARE)
+Notification (type, read, data JSON)
 ```
 
 ---
 
-# 🧪 Testes
+## 🔐 Variáveis de Ambiente Obrigatórias
 
-| Camada | Ferramenta | Cobertura |
-|--------|------------|-----------|
-| **Unitários (Backend)** | Jest | Payments, Orders, Stats, Notifications ✅ |
-| **Integração** | Prisma + Testcontainers | Pendente |
-| **E2E API** | Supertest | Pendente |
-| **E2E Frontend** | Playwright | Pendente |
-| **E2E Mobile** | Detox | Pendente |
+| Serviço | Variáveis |
+|---------|-----------|
+| **Backend** | `DATABASE_URL`, `JWT_SECRET`, `JWT_REFRESH_SECRET`, `FRONTEND_URL`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_ACCESS_KEY_ID`, `CLOUDFLARE_SECRET_ACCESS_KEY`, `CLOUDFLARE_R2_BUCKET_NAME`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` |
+| **Frontend** | `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` |
+| **Mobile** | `EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY` |
+
+> Consulte `.env.example` em cada pasta para lista completa.
+
+---
+
+## 🧪 Testes
 
 ```bash
 # Backend
-cd backend && pnpm test           # Unit
-cd backend && pnpm test:cov       # Coverage
-cd backend && pnpm test:e2e       # E2E
+cd backend
+npm run test          # Unitários (Jest)
+npm run test:e2e      # E2E (Supertest)
+npm run test:cov      # Cobertura
 
 # Frontend
-cd frontend && pnpm test          # Quando configurado
+cd frontend
+npm run test          # Jest + React Testing Library
+npm run test:e2e      # Playwright
 
 # Mobile
-cd mobile && pnpm test            # Quando configurado
+cd mobile
+npm run test          # Jest + React Native Testing Library
+npm run test:e2e      # Detox
 ```
 
 ---
 
-# 🚀 CI/CD — GitHub Actions
+## 🚢 CI/CD (GitHub Actions)
 
-| Workflow | Ficheiro | Triggers |
-|----------|----------|----------|
-| **Backend CI** | `.github/workflows/backend-ci.yml` | Push `backend/**` |
-| **Frontend CI** | `.github/workflows/frontend-ci.yml` | Push `frontend/**` |
-| **Mobile CI** | `.github/workflows/mobile-ci.yml` | Push `mobile/**` |
+| Workflow | Trigger | Jobs |
+|----------|---------|------|
+| **backend-ci.yml** | push `backend/**` | lint → test → prisma migrate → build Docker |
+| **frontend-ci.yml** | push `frontend/**` | lint → type-check → build → deploy Vercel |
+| **mobile-ci.yml** | push `mobile/**` | lint → type-check → EAS Build (Android/iOS) |
 
-**Backend**: lint → type-check → prisma migrate → unit tests → e2e → Docker build → push GHCR  
-**Frontend**: lint → type-check → build → Vercel deploy (main)  
-**Mobile**: lint → type-check → EAS Build (Android APK + iOS IPA) → Expo upload  
-
-### Secrets necessários (GitHub → Settings → Secrets → Actions)
-| Secret | Descrição |
-|--------|-----------|
-| `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID` | Deploy Frontend |
-| `EXPO_TOKEN` | EAS Build Mobile |
-| `DATABASE_URL` | PostgreSQL (tests + deploy) |
-| `JWT_SECRET`, `JWT_REFRESH_SECRET` | Auth |
-| `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | Pagamentos |
-| `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_ACCESS_KEY_ID`, `CLOUDFLARE_SECRET_ACCESS_KEY`, `CLOUDFLARE_R2_BUCKET_NAME` | Storage R2 |
-| `FRONTEND_URL`, `NEXT_PUBLIC_API_URL`, `EXPO_PUBLIC_API_URL` | URLs |
+Configure os **secrets** no GitHub:
+- `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
+- `EXPO_TOKEN`
+- `DATABASE_URL`, `JWT_SECRET`, `STRIPE_SECRET_KEY`, etc.
 
 ---
 
-# 📌 Estado do Projeto  
-*(Atualizado: 18/07/2026)*
+## 📁 Estrutura de Pastas (Resumo)
 
-| Componente | Estado | Detalhes |
-|------------|--------|----------|
-| **Estrutura inicial** | ✅ | Repo organizado, 3 apps + docs |
-| **Backend — Módulos core** | ✅ | 14 módulos (Auth→Notifications) |
-| **Backend — Stripe Payments** | ✅ | PaymentIntents, Webhooks, Refunds |
-| **Backend — Orders** | ✅ | Carrinho, OrderItems, Status flow |
-| **Backend — Stats** | ✅ | Photographer/Event/Photo/Client |
-| **Backend — Notifications** | ✅ | CRUD + bulk + conveniência |
-| **Backend — Swagger/OpenAPI** | ✅ | Tags, BearerAuth, DTOs decorados |
-| **Backend — Testes unitários** | ✅ | 4 suites (Payments, Orders, Stats, Notif) |
-| **Prisma Schema** | ✅ | 14 models, enums, indexes, cascades |
-| **Frontend — Landing** | ✅ | Hero, features, stats, testimonials, CTA |
-| **Frontend — Auth** | ✅ | Login/Register + Zustand + React Query |
-| **Frontend — Dashboard** | ✅ | Sidebar, stats, eventos recentes, ações |
-| **Frontend — UI Kit** | ✅ | Button, Input, Card, Toast, Avatar |
-| **Mobile — Navigation** | ✅ | Stack (auth) + Tabs (main) |
-| **Mobile — Auth** | ✅ | SecureStore + auto-login + refresh |
-| **Mobile — Events** | ✅ | Lista + detalhe + pull-to-refresh |
-| **Mobile — Gallery** | ✅ | Grid 3col, fullscreen, favoritos, seleção |
-| **Mobile — Anti-screenshot** | ✅ | FLAG_SECURE Android |
-| **CI/CD — Backend** | ✅ | Lint, test, build, Docker, GHCR |
-| **CI/CD — Frontend** | ✅ | Lint, type-check, build, Vercel |
-| **CI/CD — Mobile** | ✅ | Lint, type-check, EAS Build |
-| **Documentação** | ✅ | `sandro.md`, `ANALISE_EXAUSTIVA.md`, `README.md` |
+```
+backend/
+├── src/
+│   ├── auth/           # JWT, Guards, Strategies, DTOs
+│   ├── users/          # CRUD users
+│   ├── photographers/  # Perfil fotógrafo
+│   ├── events/         # Eventos + publish
+│   ├── albums/         # Álbuns
+│   ├── photos/         # Upload R2, signed URLs
+│   ├── storage/        # Cloudflare R2 service
+│   ├── packs/          # Packs + vehicles
+│   ├── vehicles/       # Veículos
+│   ├── reservations/   # CRUD + status
+│   ├── orders/         # Carrinho + items
+│   ├── payments/       # Stripe service + webhooks
+│   ├── stats/          # Agregações + recordStat
+│   ├── notifications/  # In-app + email
+│   ├── common/         # Guards, decorators, pipes
+│   ├── prisma/         # PrismaService
+│   ├── app.module.ts
+│   └── main.ts         # Swagger + CORS + ValidationPipe
+├── prisma/schema.prisma
+└── test/               # Unit + E2E
+
+frontend/
+├── src/
+│   ├── app/            # App Router (layout, page, auth/, dashboard/)
+│   ├── components/     # ui/, forms/, layout/, photos/
+│   ├── lib/            # api.ts, auth-context.tsx, utils.ts, types.ts
+│   └── styles/         # globals.css (Tailwind v4)
+├── tailwind.config.ts
+└── .env.example
+
+mobile/
+├── app/                # expo-router (auth/, (tabs)/, events/, gallery/)
+├── src/
+│   ├── screens/        # auth/, events/, gallery/, photos/, profile/
+│   ├── components/     # ui/, forms/, layout/
+│   ├── lib/            # api.ts, auth-context.tsx, types.ts
+│   └── store/          # Zustand stores
+├── .env.example
+└── app.json
+```
 
 ---
 
-# 👤 Autor
+## 📚 Documentação
+
+- `backend/README.md` – Setup backend detalhado
+- `frontend/README.md` – Setup frontend detalhado
+- `mobile/README.md` – Setup mobile detalhado
+- `docs/` – Diagramas, decisões de arquitetura, guias
+- Swagger UI: `http://localhost:3001/api` (quando backend a correr)
+
+---
+
+## 🤝 Contribuir
+
+1. Fork → Branch (`feat/nova-funcionalidade`)
+2. Commit atómico em pt-PT (`feat: adicionar validação de mime-type no upload`)
+3. PR → Review → Merge
+
+---
+
+## 📄 Licença
+
+Proprietário – Sandro Pereira. Todos os direitos reservados.
+
+---
+
+## 👤 Autor
 
 **Sandro Pereira**  
 Criador e proprietário do projeto.  
-GitHub: [@smpsandro1239](https://github.com/smpsandro1239)  
-Repositório: [Fotografo](https://github.com/smpsandro1239/Fotografo)
+GitHub: [@smpsandro1239](https://github.com/smpsandro1239)
 
 ---
 
-> **Nota**: Este README reflete o estado real do código no branch `main`.  
-> Para detalhes técnicos profundos, consulte `ANALISE_EXAUSTIVA.md`.  
-> Para histórico de decisões e ToDo, consulte `sandro.md`.
+> **Nota:** Este é um projeto SaaS de nível produção. Certifique-se de configurar todas as variáveis de ambiente, secrets, webhooks Stripe e domínios personalizados antes de ir para produção.
