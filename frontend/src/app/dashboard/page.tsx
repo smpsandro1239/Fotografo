@@ -21,7 +21,8 @@ export default function DashboardPage() {
   const { data: stats, isLoading: statsLoading } = usePhotographerStats('month');
   const { data: eventsData, isLoading: eventsLoading } = useEvents({ limit: 5 });
 
-  const summary = stats?.summary;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const summary = (stats as any)?.summary;
 
   if (statsLoading || eventsLoading) {
     return (
