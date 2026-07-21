@@ -17,14 +17,14 @@ enum UserRole {
 }
 
 model User {
-  id            String          @id @default(uuid())
-  email         String          @unique
-  password      String
-  name          String?
-  role          UserRole        @default(CLIENT)
-  isActive      Boolean         @default(true)
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      UserRole @default(CLIENT)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   photographer  Photographer?
   reservations  Reservation[]
@@ -33,17 +33,17 @@ model User {
 }
 
 model Photographer {
-  id          String   @id @default(uuid())
-  userId      String   @unique
-  user        User     @relation(fields: [userId], references: [id])
-  bio         String?
-  website     String?
-  portfolio   String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  bio       String?
+  website   String?
+  portfolio String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  events      Event[]
-  packs       Pack[]
+  events Event[]
+  packs  Pack[]
 }
 
 model Event {
@@ -58,8 +58,8 @@ model Event {
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 
-  albums         Album[]
-  reservations   Reservation[]
+  albums       Album[]
+  reservations Reservation[]
 }
 
 model Album {
@@ -70,7 +70,7 @@ model Album {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  photos    Photo[]
+  photos Photo[]
 }
 
 model Photo {
@@ -82,7 +82,7 @@ model Photo {
   metadata  Json?
   createdAt DateTime @default(now())
 
-  stats     Stat[]
+  stats Stat[]
 }
 
 model Pack {
@@ -95,7 +95,7 @@ model Pack {
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 
-  vehicles       Vehicle[]
+  vehicles Vehicle[]
 }
 
 model Vehicle {
@@ -119,7 +119,7 @@ model Reservation {
   createdAt DateTime          @default(now())
   updatedAt DateTime          @updatedAt
 
-  payment   Payment?
+  payment Payment?
 }
 
 enum ReservationStatus {
@@ -137,8 +137,8 @@ model Order {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
 
-  payment   Payment?
-  items     OrderItem[]
+  payment Payment?
+  items   OrderItem[]
 }
 
 enum OrderStatus {
@@ -150,16 +150,16 @@ enum OrderStatus {
 }
 
 model OrderItem {
-  id        String        @id @default(uuid())
-  orderId   String
-  order     Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  type      OrderItemType
+  id          String        @id @default(uuid())
+  orderId     String
+  order       Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  type        OrderItemType
   referenceId String
-  quantity  Int           @default(1)
-  unitPrice Decimal
-  options   String?       // JSON for size, paper type, etc.
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
+  quantity    Int           @default(1)
+  unitPrice   Decimal
+  options     String? // JSON for size, paper type, etc.
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 }
 
 enum OrderItemType {
@@ -192,11 +192,11 @@ enum PaymentStatus {
 }
 
 model Stat {
-  id        String     @id @default(uuid())
+  id        String   @id @default(uuid())
   photoId   String
-  photo     Photo      @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  photo     Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
   type      StatType
-  createdAt DateTime   @default(now())
+  createdAt DateTime @default(now())
 
   @@index([photoId, type])
 }
@@ -209,15 +209,15 @@ enum StatType {
 }
 
 model Notification {
-  id        String            @id @default(uuid())
+  id        String           @id @default(uuid())
   userId    String
-  user      User              @relation(fields: [userId], references: [id])
+  user      User             @relation(fields: [userId], references: [id])
   title     String
   message   String
-  type      NotificationType  @default(INFO)
-  read      Boolean           @default(false)
-  data      Json?             // Additional data (links, IDs, etc.)
-  createdAt DateTime          @default(now())
+  type      NotificationType @default(INFO)
+  read      Boolean          @default(false)
+  data      Json? // Additional data (links, IDs, etc.)
+  createdAt DateTime         @default(now())
 }
 
 enum NotificationType {
