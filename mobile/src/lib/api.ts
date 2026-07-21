@@ -1,3 +1,5 @@
+import * as SecureStore from 'expo-securestore';
+
 const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3001';
 
 class ApiClient {
@@ -11,9 +13,8 @@ class ApiClient {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
-    const accessToken = localStorage.getItem('fotografo_tokens')
-      ? JSON.parse(localStorage.getItem('fotografo_tokens')!).accessToken
-      : null;
+    const tokensJson = await SecureStore.getItemAsync('fotografo_tokens');
+    const accessToken = tokensJson ? JSON.parse(tokensJson).accessToken : null;
 
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
@@ -138,9 +139,8 @@ class ApiClient {
       formData.append('metadata', JSON.stringify(metadata));
     }
 
-    const accessToken = localStorage.getItem('fotografo_tokens')
-      ? JSON.parse(localStorage.getItem('fotografo_tokens')!).accessToken
-      : null;
+    const tokensJson = await SecureStore.getItemAsync('fotografo_tokens');
+    const accessToken = tokensJson ? JSON.parse(tokensJson).accessToken : null;
 
     const response = await fetch(`${this.baseUrl}/albums/${albumId}/photos`, {
       method: 'POST',

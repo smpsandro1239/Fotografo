@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useAuth } from '@/store/auth';
+import { useAuth } from '@/lib/auth-context';
 import { styles } from './styles';
 
 export default function LoginScreen() {
