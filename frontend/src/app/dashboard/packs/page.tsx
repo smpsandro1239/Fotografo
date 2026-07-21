@@ -44,7 +44,7 @@ export default function PacksPage() {
     setDialogOpen(true);
   };
 
-  const openEdit = (pack: { id: string; name: string; price: number; description: string }) => {
+  const openEdit = (pack: { id: string; name: string; price: number; description?: string }) => {
     setEditingPackId(pack.id);
     setForm({ name: pack.name, price: String(pack.price / 100), description: pack.description || '' });
     setDialogOpen(true);
