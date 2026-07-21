@@ -1,3 +1,5 @@
+import type { User, Photographer, Event, Album, Photo, Pack, Reservation, Order, Notification, PaginatedResponse } from './types';
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 class ApiClient {
@@ -231,84 +233,3 @@ class ApiClient {
 }
 
 export const api = new ApiClient(API_URL);
-
-export interface User {
-  id: string;
-  email: string;
-  name?: string;
-  role: 'ADMIN' | 'PHOTOGRAPHER' | 'CLIENT';
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface Photographer {
-  id: string;
-  userId: string;
-  user: User;
-  bio?: string;
-  website?: string;
-  portfolio?: string;
-}
-
-export interface Event {
-  id: string;
-  photographerId: string;
-  name: string;
-  description?: string;
-  date: string;
-  location?: string;
-  isPublic: boolean;
-}
-
-export interface Album {
-  id: string;
-  eventId: string;
-  name: string;
-}
-
-export interface Photo {
-  id: string;
-  albumId: string;
-  url: string;
-  thumbnail?: string;
-}
-
-export interface Pack {
-  id: string;
-  photographerId: string;
-  name: string;
-  price: number;
-  description?: string;
-}
-
-export interface Reservation {
-  id: string;
-  userId: string;
-  eventId: string;
-  status: 'PENDING' | 'CONFIRMED' | 'CANCELLED';
-  event?: Event;
-}
-
-export interface Order {
-  id: string;
-  userId: string;
-  status: string;
-  total: number;
-}
-
-export interface Notification {
-  id: string;
-  userId: string;
-  title: string;
-  message: string;
-  read: boolean;
-}
-
-export interface PaginatedResponse<T> {
-  data: T[];
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-}

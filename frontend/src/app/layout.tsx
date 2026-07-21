@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
-import { AuthProvider } from '@/lib/auth-context';
+import { Providers } from './providers';
+import { ErrorBoundary } from '@/components/error-boundary';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="pt-PT" suppressHydrationWarning>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased min-h-screen bg-background`}>
-        <AuthProvider>{children}</AuthProvider>
+        <Providers><ErrorBoundary>{children}</ErrorBoundary></Providers>
       </body>
     </html>
   );
