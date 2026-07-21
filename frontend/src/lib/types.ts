@@ -52,7 +52,7 @@ export interface Photo {
   album?: Album;
   url: string;
   thumbnail?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, string>;
   createdAt: string;
   stats?: Stat[];
 }
@@ -120,7 +120,7 @@ export interface OrderItem {
   referenceId: string;
   quantity: number;
   unitPrice: number;
-  options?: Record<string, any>;
+  options?: Record<string, string>;
   createdAt: string;
 }
 
@@ -143,7 +143,7 @@ export interface Notification {
   message: string;
   type: string;
   read: boolean;
-  data?: Record<string, any>;
+  data?: Record<string, string>;
   createdAt: string;
 }
 

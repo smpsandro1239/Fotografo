@@ -50,8 +50,8 @@ export default function RegisterPage() {
       toast.success('Conta criada com sucesso!');
       router.push('/dashboard');
       router.refresh();
-    } catch (error: any) {
-      toast.error(error.message || 'Erro ao criar conta');
+    } catch (error: unknown) {
+      toast.error(error instanceof Error ? error.message : 'Erro ao criar conta');
     }
   };
 

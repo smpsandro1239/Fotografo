@@ -59,8 +59,8 @@ export default function AlbumDetailPage() {
       setPreviews([]);
       queryClient.invalidateQueries({ queryKey: ['photos', albumId] });
       toast.success(`${previews.length} foto(s) carregada(s) com sucesso.`);
-    } catch (err: any) {
-      toast.error(err.message || 'Erro ao carregar fotos.');
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro ao carregar fotos.');
     } finally {
       setUploading(false);
     }
@@ -73,8 +73,8 @@ export default function AlbumDetailPage() {
       queryClient.invalidateQueries({ queryKey: ['photos', albumId] });
       toast.success('Foto eliminada.');
       setDeleteId(null);
-    } catch (err: any) {
-      toast.error(err.message || 'Erro ao eliminar foto.');
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro ao eliminar foto.');
     }
   };
 

@@ -130,7 +130,7 @@ class ApiClient {
     return this.get<Photo[]>(`/albums/${albumId}/photos`);
   }
 
-  async uploadPhoto(albumId: string, file: File, metadata?: Record<string, any>) {
+  async uploadPhoto(albumId: string, file: File, metadata?: Record<string, string>) {
     const formData = new FormData();
     formData.append('file', file);
     if (metadata) {
@@ -193,7 +193,7 @@ class ApiClient {
     return this.get<Order[]>('/orders');
   }
 
-  async createOrder(data: any) {
+  async createOrder(data: { packId: string; eventId?: string; quantity?: number; options?: Record<string, string> }) {
     return this.post<Order>('/orders', data);
   }
 
