@@ -1,7 +1,7 @@
 # 📊 Análise Exaustiva do Projeto "Fotografo"
 
-> **Data da análise:** 18/07/2026  
-> **Estado do repositório:** Clone inicial de https://github.com/smpsandro1239/Fotografo.git
+> ⚠️ **FICHEIRO DESATUALIZADO** — Este documento reflete o estado do projeto em 18/07/2026.  
+> Consulta `tasks_done.txt` ou `README.md` para o estado real atual.
 
 ---
 
@@ -9,10 +9,11 @@
 
 | Métrica | Valor |
 |---------|-------|
-| **Backend completo** | ~85% (core modules done, Stripe/Orders/Stats/Notifications pendentes) |
-| **Frontend** | ~5% (apenas setup base Next.js 16) |
-| **Mobile** | ~5% (apenas setup base Expo) |
-| **DevOps/Tests** | 0% |
+| **Backend completo** | ~95% (16 módulos: Auth, Users, Photographers, Events, Albums, Photos, Storage, Packs, Vehicles, Reservations, Orders, Payments, Stats, Notifications, Prisma, Common) |
+| **Frontend** | ~35% (landing page + auth + dashboard + API client + componentes UI) |
+| **Mobile** | ~30% (auth + tabs + API client + screens básicas) |
+| **DevOps** | ~80% (CI/CD completo backend/frontend/mobile, Dockerfile criado) |
+| **Testes** | 0% |
 | **Documentação** | 70% (README + sandro.md completos, Swagger pendente) |
 
 ---
