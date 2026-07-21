@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+
 import { useRouter } from 'next/navigation';
 import { Menu, Bell, Search, Sun, Moon, Monitor, LogOut, User, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -29,8 +29,6 @@ export function Header({ onMenuClick }: HeaderProps) {
   const { data: user } = useProfile();
   const { logout } = useAuth();
   const { setTheme } = useTheme();
-  const [searchOpen, setSearchOpen] = useState(false);
-
   const unreadCount = unreadData?.count ?? 0;
 
   return (

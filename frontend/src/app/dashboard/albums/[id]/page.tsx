@@ -8,6 +8,7 @@ import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import NextImage from 'next/image';
 import {
   Dialog,
   DialogContent,
@@ -137,10 +138,11 @@ export default function AlbumDetailPage() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {previews.map((preview, i) => (
               <div key={i} className="relative group aspect-square">
-                <img
+                <NextImage
                   src={preview.url}
                   alt="Preview"
-                  className="w-full h-full object-cover rounded-lg"
+                  fill
+                  className="object-cover rounded-lg"
                 />
                 <button
                   onClick={() => removePreview(i)}
@@ -158,10 +160,11 @@ export default function AlbumDetailPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {photos.map((photo) => (
             <div key={photo.id} className="relative group aspect-square">
-              <img
+              <NextImage
                 src={photo.thumbnail || photo.url}
                 alt=""
-                className="w-full h-full object-cover rounded-lg"
+                fill
+                className="object-cover rounded-lg"
               />
               <button
                 onClick={() => setDeleteId(photo.id)}

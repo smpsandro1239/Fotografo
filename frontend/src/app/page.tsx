@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Camera, Calendar, Package, Shield, Star, ArrowRight, CheckCircle, Users } from 'lucide-react';
+import { Camera, Calendar, Package, Shield, Star, ArrowRight, CheckCircle } from 'lucide-react';
 
 const features = [
   {

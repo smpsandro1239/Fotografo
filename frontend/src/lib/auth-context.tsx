@@ -52,7 +52,7 @@ const useAuthStore = create<AuthState>()(
           try {
             const user = await api.getProfile();
             set({ user, isAuthenticated: true, isLoading: false });
-          } catch (error) {
+          } catch {
             // Token might be expired, try refresh
             try {
               await get().refreshAccessToken();

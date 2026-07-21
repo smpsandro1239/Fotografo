@@ -21,7 +21,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Image, Trash2, X } from 'lucide-react';
+import { Image as ImageIcon, Trash2, X } from 'lucide-react';
+import NextImage from 'next/image';
 import toast from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -100,7 +101,7 @@ export default function PhotosPage() {
       {(!selectedEventId || !selectedAlbumId) && (
         <Card>
           <CardContent className="text-center py-12">
-            <Image className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" />
+            <ImageIcon className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" aria-hidden="true" />
             <p className="text-muted-foreground">
               Selecione um evento e um álbum para ver as fotos
             </p>
@@ -119,7 +120,7 @@ export default function PhotosPage() {
       {selectedEventId && selectedAlbumId && !photosLoading && photos && photos.length === 0 && (
         <Card>
           <CardContent className="text-center py-12">
-            <Image className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" />
+            <ImageIcon className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" aria-hidden="true" />
             <p className="text-muted-foreground">Nenhuma foto neste álbum</p>
           </CardContent>
         </Card>
@@ -129,10 +130,11 @@ export default function PhotosPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {photos.map((photo) => (
             <div key={photo.id} className="relative group aspect-square rounded-lg overflow-hidden border border-border">
-              <img
+              <NextImage
                 src={photo.thumbnail || photo.url}
                 alt=""
-                className="w-full h-full object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
+                fill
+                className="object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
                 onClick={() => setLightboxPhoto(photo.url)}
               />
               <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -161,9 +163,11 @@ export default function PhotosPage() {
           >
             <X className="h-6 w-6" />
           </button>
-          <img
+          <NextImage
             src={lightboxPhoto || ''}
             alt=""
+            width={1200}
+            height={800}
             className="w-full max-h-[85vh] object-contain"
           />
         </DialogContent>

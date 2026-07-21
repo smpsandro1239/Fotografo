@@ -1,4 +1,4 @@
-import type { User, Photographer, Event, Album, Photo, Pack, Reservation, Order, Notification, PaginatedResponse } from './types';
+import type { User, Event, Album, Photo, Pack, Reservation, Order, Notification, PaginatedResponse } from './types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
