@@ -47,10 +47,10 @@ export default function LoginPage() {
   };
 
   return (
-    <Card>
+    <Card className="gold-border bg-card/80 backdrop-blur luxury-shadow">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-center text-xl">Entrar na conta</CardTitle>
-        <CardDescription className="text-center">
+        <CardTitle className="text-center text-xl font-display">Entrar na conta</CardTitle>
+        <CardDescription className="text-center text-muted-foreground">
           Aceda ao seu painel de fotógrafo
         </CardDescription>
       </CardHeader>
@@ -64,7 +64,7 @@ export default function LoginPage() {
                 id="email"
                 type="email"
                 placeholder="seu@email.com"
-                className="pl-10"
+                className="pl-10 bg-surface-light border-gold/10 focus:border-gold/30 focus:ring-gold/20"
                 {...register('email')}
                 disabled={isSubmitting}
               />
@@ -82,13 +82,13 @@ export default function LoginPage() {
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 placeholder="A sua password"
-                className="pl-10 pr-10"
+                className="pl-10 pr-10 bg-surface-light border-gold/10 focus:border-gold/30 focus:ring-gold/20"
                 {...register('password')}
                 disabled={isSubmitting}
               />
               <button
                 type="button"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-gold transition-colors"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -99,7 +99,7 @@ export default function LoginPage() {
             )}
           </div>
 
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
+          <Button type="submit" className="w-full gold-gradient text-background font-medium hover:opacity-90 transition-opacity" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin mr-2" />
@@ -114,11 +114,11 @@ export default function LoginPage() {
       <CardFooter className="flex flex-col space-y-4">
         <p className="text-sm text-muted-foreground text-center">
           Não tem conta?{' '}
-          <Link href="/auth/register" className="text-primary hover:underline font-medium">
+          <Link href="/auth/register" className="text-gold hover:underline font-medium">
             Criar conta
           </Link>
         </p>
-        <Link href="/" className="text-sm text-muted-foreground hover:text-foreground text-center">
+        <Link href="/" className="text-sm text-muted-foreground hover:text-gold text-center transition-colors">
           ← Voltar ao site
         </Link>
       </CardFooter>

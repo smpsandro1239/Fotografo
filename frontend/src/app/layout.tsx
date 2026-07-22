@@ -17,8 +17,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Fotografo - Plataforma Premium para Fotógrafos',
-  description: 'Gestão de eventos, galerias protegidas, reservas com pagamento e app mobile para clientes.',
+  title: 'LUMINA — Plataforma Premium para Fotógrafos',
+  description: 'Gestão de eventos, galerias protegidas, reservas com pagamento e app mobile para clientes. A plataforma criada para fotógrafos que valorizam a excelência.',
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-PT" suppressHydrationWarning>
+    <html lang="pt-PT" className="dark" suppressHydrationWarning>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased min-h-screen bg-background`}>
         <Providers><ErrorBoundary>{children}</ErrorBoundary></Providers>
       </body>

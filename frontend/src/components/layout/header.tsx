@@ -32,11 +32,11 @@ export function Header({ onMenuClick }: HeaderProps) {
   const unreadCount = unreadData?.count ?? 0;
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 lg:px-6">
+    <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b border-gold/10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 lg:px-6">
       <Button
         variant="ghost"
         size="icon"
-        className="lg:hidden"
+        className="lg:hidden hover:bg-gold/10 hover:text-gold"
         onClick={onMenuClick}
       >
         <Menu className="h-5 w-5" />
@@ -49,7 +49,7 @@ export function Header({ onMenuClick }: HeaderProps) {
           <Input
             type="search"
             placeholder="Pesquisar..."
-            className="pl-9 h-9"
+            className="pl-9 h-9 bg-surface-light border-gold/10 focus:border-gold/30 focus:ring-gold/20"
           />
         </div>
       </div>
@@ -58,7 +58,7 @@ export function Header({ onMenuClick }: HeaderProps) {
         <Button
           variant="ghost"
           size="icon"
-          className="relative"
+          className="relative hover:bg-gold/10 hover:text-gold"
           onClick={() => router.push('/dashboard/notifications')}
         >
           <Bell className="h-5 w-5" />
@@ -75,9 +75,9 @@ export function Header({ onMenuClick }: HeaderProps) {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="rounded-full">
+            <Button variant="ghost" size="icon" className="rounded-full hover:bg-gold/10">
               <Avatar className="h-8 w-8">
-                <AvatarFallback className="bg-primary/10 text-primary text-xs font-medium">
+                <AvatarFallback className="bg-gold/10 text-gold text-xs font-medium">
                   {user?.name
                     ? user.name
                         .split(' ')
@@ -91,44 +91,45 @@ export function Header({ onMenuClick }: HeaderProps) {
               <span className="sr-only">Menu do utilizador</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
+          <DropdownMenuContent align="end" className="w-56 bg-card border-gold/10">
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium">{user?.name || 'Utilizador'}</p>
                 <p className="text-xs text-muted-foreground">{user?.email}</p>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => router.push('/dashboard/settings')}>
+            <DropdownMenuSeparator className="bg-gold/10" />
+            <DropdownMenuItem onClick={() => router.push('/dashboard/settings')} className="hover:bg-gold/5 focus:bg-gold/5">
               <User className="mr-2 h-4 w-4" />
               <span>Perfil</span>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => router.push('/dashboard/settings')}>
+            <DropdownMenuItem onClick={() => router.push('/dashboard/settings')} className="hover:bg-gold/5 focus:bg-gold/5">
               <Settings className="mr-2 h-4 w-4" />
               <span>Definições</span>
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="bg-gold/10" />
             <DropdownMenuLabel className="text-xs text-muted-foreground">
               Tema
             </DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => setTheme('light')}>
+            <DropdownMenuItem onClick={() => setTheme('light')} className="hover:bg-gold/5 focus:bg-gold/5">
               <Sun className="mr-2 h-4 w-4" />
               <span>Claro</span>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme('dark')}>
+            <DropdownMenuItem onClick={() => setTheme('dark')} className="hover:bg-gold/5 focus:bg-gold/5">
               <Moon className="mr-2 h-4 w-4" />
               <span>Escuro</span>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme('system')}>
+            <DropdownMenuItem onClick={() => setTheme('system')} className="hover:bg-gold/5 focus:bg-gold/5">
               <Monitor className="mr-2 h-4 w-4" />
               <span>Sistema</span>
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="bg-gold/10" />
             <DropdownMenuItem
               onClick={() => {
                 logout();
                 router.push('/');
               }}
+              className="hover:bg-gold/5 focus:bg-gold/5"
             >
               <LogOut className="mr-2 h-4 w-4" />
               <span>Sair</span>

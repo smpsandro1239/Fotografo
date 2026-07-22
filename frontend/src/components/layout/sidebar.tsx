@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Camera, LayoutDashboard, Calendar, Images, Package, Car, CalendarCheck, ShoppingBag, Bell, Settings } from 'lucide-react';
+import { Aperture, LayoutDashboard, Calendar, Images, Package, Car, CalendarCheck, ShoppingBag, Bell, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useProfile } from '@/hooks/use-api';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -31,18 +31,18 @@ export function Sidebar({ className }: SidebarProps) {
   return (
     <aside
       className={cn(
-        'flex h-full w-64 flex-col border-r border-border bg-card',
+        'flex h-full w-64 flex-col border-r border-gold/10 bg-surface',
         className
       )}
     >
-      <div className="flex h-14 items-center gap-2 border-b border-border px-4">
-        <Link href="/dashboard" className="flex items-center gap-2 font-display text-lg font-bold text-primary">
-          <Camera className="h-6 w-6" />
-          <span>Fotografo</span>
+      <div className="flex h-14 items-center gap-2.5 border-b border-gold/10 px-4">
+        <Link href="/dashboard" className="flex items-center gap-2.5">
+          <Aperture className="h-6 w-6 text-gold" strokeWidth={1.5} />
+          <span className="font-display text-lg font-semibold tracking-wide gold-text">LUMINA</span>
         </Link>
       </div>
 
-      <nav className="flex-1 overflow-y-auto p-3 space-y-1">
+      <nav className="flex-1 overflow-y-auto p-3 space-y-0.5">
         {navItems.map((item) => {
           const isActive =
             item.href === '/dashboard'
@@ -54,41 +54,41 @@ export function Sidebar({ className }: SidebarProps) {
               key={item.href}
               href={item.href}
               className={cn(
-                'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200',
                 isActive
-                  ? 'bg-primary/10 text-primary'
-                  : 'text-muted-foreground hover:bg-accent hover:text-foreground'
+                  ? 'bg-gold/10 text-gold'
+                  : 'text-muted-foreground hover:bg-gold/5 hover:text-foreground'
               )}
             >
-              <item.icon className="h-4 w-4" />
+              <item.icon className="h-4 w-4" strokeWidth={1.5} />
               <span>{item.label}</span>
             </Link>
           );
         })}
       </nav>
 
-      <Separator />
+      <Separator className="bg-gold/10" />
 
       <div className="p-3">
         <Link
           href="/dashboard/settings"
           className={cn(
-            'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+            'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200',
             pathname === '/dashboard/settings'
-              ? 'bg-primary/10 text-primary'
-              : 'text-muted-foreground hover:bg-accent hover:text-foreground'
+              ? 'bg-gold/10 text-gold'
+              : 'text-muted-foreground hover:bg-gold/5 hover:text-foreground'
           )}
         >
-          <Settings className="h-4 w-4" />
+          <Settings className="h-4 w-4" strokeWidth={1.5} />
           <span>Definições</span>
         </Link>
       </div>
 
-      <Separator />
+      <Separator className="bg-gold/10" />
 
       <div className="flex items-center gap-3 p-4">
         <Avatar className="h-9 w-9">
-          <AvatarFallback className="bg-primary/10 text-primary text-sm font-medium">
+          <AvatarFallback className="bg-gold/10 text-gold text-sm font-medium">
             {user?.name
               ? user.name
                   .split(' ')
