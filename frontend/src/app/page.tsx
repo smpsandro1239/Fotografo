@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Camera, Calendar, Package, Shield, Star, ArrowRight, CheckCircle, Aperture, Eye, CreditCard, Lock } from 'lucide-react';
+import { Calendar, Package, Star, ArrowRight, CheckCircle, Aperture, Eye, CreditCard, Lock } from 'lucide-react';
 
 const features = [
   {
@@ -51,10 +52,27 @@ const testimonials = [
 ];
 
 const galleryItems = [
-  { title: 'Casamento', subtitle: 'Lisboa' },
-  { title: 'Evento Corporativo', subtitle: 'Porto' },
-  { title: 'Sessão de Retrato', subtitle: 'Braga' },
-  { title: 'Aniversário', subtitle: 'Faro' },
+  {
+    title: 'Casamento',
+    subtitle: 'Lisboa',
+    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=800&fit=crop&q=80',
+    large: true,
+  },
+  {
+    title: 'Evento Corporativo',
+    subtitle: 'Porto',
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=450&fit=crop&q=80',
+  },
+  {
+    title: 'Sessão de Retrato',
+    subtitle: 'Braga',
+    image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=450&fit=crop&q=80',
+  },
+  {
+    title: 'Aniversário',
+    subtitle: 'Faro',
+    image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&h=450&fit=crop&q=80',
+  },
 ];
 
 export default function LandingPage() {
@@ -95,9 +113,20 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        {/* Background image with overlay */}
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=1920&h=1080&fit=crop&q=80"
+            alt=""
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
+        </div>
+        
         {/* Ambient glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-gold/5 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-gold/3 rounded-full blur-[100px] pointer-events-none" />
         
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
@@ -208,19 +237,23 @@ export default function LandingPage() {
             </p>
           </div>
 
-          {/* Gallery grid */}
+          {/* Gallery grid with real photos */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {galleryItems.map((item, i) => (
               <div
                 key={item.title}
-                className={`relative group overflow-hidden rounded-xl gold-border bg-surface-light ${
+                className={`relative group overflow-hidden rounded-xl gold-border ${
                   i === 0 ? 'md:col-span-2 md:row-span-2 aspect-square' : 'aspect-[4/3]'
                 }`}
               >
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes={i === 0 ? '(max-width: 768px) 50vw, 50vw' : '(max-width: 768px) 50vw, 25vw'}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Camera className="h-12 w-12 text-gold/20 group-hover:text-gold/40 transition-colors duration-500" strokeWidth={1} />
-                </div>
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <p className="font-display text-lg font-semibold">{item.title}</p>
                   <p className="text-sm text-muted-foreground">{item.subtitle}</p>
@@ -280,22 +313,28 @@ export default function LandingPage() {
                 ))}
               </ul>
             </div>
-            <div className="relative aspect-[4/3] rounded-2xl gold-border bg-surface-light overflow-hidden luxury-shadow">
-              <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Calendar className="h-24 w-24 text-gold/15" strokeWidth={1} />
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-background/80 to-transparent" />
+            <div className="relative aspect-[4/3] rounded-2xl gold-border overflow-hidden luxury-shadow">
+              <Image
+                src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop&q=80"
+                alt="Gestão de eventos"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
             </div>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-center mt-24">
-            <div className="relative aspect-[4/3] rounded-2xl gold-border bg-surface-light overflow-hidden luxury-shadow order-2 lg:order-1">
-              <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Package className="h-24 w-24 text-gold/15" strokeWidth={1} />
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-background/80 to-transparent" />
+            <div className="relative aspect-[4/3] rounded-2xl gold-border overflow-hidden luxury-shadow order-2 lg:order-1">
+              <Image
+                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop&q=80"
+                alt="Pagamentos integrados"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
             </div>
             <div className="order-1 lg:order-2">
               <p className="text-xs font-medium tracking-widest uppercase text-gold mb-4">Pagamentos</p>
@@ -371,7 +410,18 @@ export default function LandingPage() {
       {/* CTA */}
       <section className="py-20 lg:py-32">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <div className="relative rounded-3xl overflow-hidden p-8 sm:p-12 lg:p-16 gold-border bg-surface-light luxury-shadow-lg">
+          <div className="relative rounded-3xl overflow-hidden p-8 sm:p-12 lg:p-16 gold-border luxury-shadow-lg">
+            {/* Background image */}
+            <div className="absolute inset-0">
+              <Image
+                src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&h=600&fit=crop&q=80"
+                alt=""
+                fill
+                className="object-cover opacity-30"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-surface/90 via-surface/80 to-surface/90" />
+            </div>
+            
             {/* Decorative glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-gold/10 rounded-full blur-[80px] pointer-events-none" />
             
