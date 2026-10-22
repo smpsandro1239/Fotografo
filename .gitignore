@@ -1,5 +1,12 @@
 node_modules/
+dist/
+build/
+.next/
+out/
+coverage/
+.nyc_output/
 .env
 .env.local
-.env.*.local
-*.log
+.env.development.local
+.env.test.local
+.env.production.local
