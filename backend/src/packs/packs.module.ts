@@ -4,6 +4,6 @@ import { PacksService } from './packs.service';
 
 @Module({
   controllers: [PacksController],
-  providers: [PacksService]
+  providers: [PacksService],
 })
 export class PacksModule {}

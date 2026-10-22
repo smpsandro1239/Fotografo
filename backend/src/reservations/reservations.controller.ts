@@ -7,7 +7,12 @@ import {
   Param,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationStatusDto } from './dto/update-reservation-status.dto';
@@ -23,8 +28,14 @@ export class ReservationsController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new reservation for an event' })
-  @ApiResponse({ status: 201, description: 'The reservation has been successfully created.' })
-  create(@GetUser('id') userId: string, @Body() createReservationDto: CreateReservationDto) {
+  @ApiResponse({
+    status: 201,
+    description: 'The reservation has been successfully created.',
+  })
+  create(
+    @GetUser('id') userId: string,
+    @Body() createReservationDto: CreateReservationDto,
+  ) {
     return this.reservationsService.create(userId, createReservationDto);
   }
 

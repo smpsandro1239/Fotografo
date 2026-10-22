@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 
 export class CreateVehicleDto {
   @ApiProperty({ example: 'uuid-v4-pack-id' })
@@ -12,7 +18,10 @@ export class CreateVehicleDto {
   @IsNotEmpty()
   name: string;
 
-  @ApiProperty({ example: 'Ideal para sessões de recém-nascidos', required: false })
+  @ApiProperty({
+    example: 'Ideal para sessões de recém-nascidos',
+    required: false,
+  })
   @IsString()
   @IsOptional()
   description?: string;

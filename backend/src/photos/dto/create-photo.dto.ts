@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString, IsUUID, IsJSON } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class CreatePhotoDto {
   @ApiProperty({ example: 'uuid-v4-album-id' })
@@ -12,7 +12,10 @@ export class CreatePhotoDto {
   @IsNotEmpty()
   url: string;
 
-  @ApiProperty({ example: 'https://cdn.example.com/thumbnails/123.jpg', required: false })
+  @ApiProperty({
+    example: 'https://cdn.example.com/thumbnails/123.jpg',
+    required: false,
+  })
   @IsString()
   @IsOptional()
   thumbnail?: string;

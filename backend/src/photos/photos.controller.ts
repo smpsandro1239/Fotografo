@@ -9,9 +9,14 @@ import {
   Query,
   UseInterceptors,
   UploadedFile,
-  ParseUUIDPipe,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags, ApiConsumes, ApiBody } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiTags,
+  ApiConsumes,
+  ApiBody,
+} from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { PhotosService } from './photos.service';
 import { StorageService } from '../storage/storage.service';
@@ -47,7 +52,7 @@ export class PhotosController {
     @UploadedFile() file: Express.Multer.File,
     @Body('albumId') albumId: string,
   ) {
-    const key = \`albums/\${albumId}/\${Date.now()}-\${file.originalname}\`;
+    const key = `albums/${albumId}/${Date.now()}-${file.originalname}`;
     const url = await this.storageService.uploadFile(file, key);
 
     return this.photosService.create(userId, {
@@ -61,7 +66,10 @@ export class PhotosController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Register a new photo metadata manually' })
-  create(@GetUser('id') userId: string, @Body() createPhotoDto: CreatePhotoDto) {
+  create(
+    @GetUser('id') userId: string,
+    @Body() createPhotoDto: CreatePhotoDto,
+  ) {
     return this.photosService.create(userId, createPhotoDto);
   }
 
@@ -83,7 +91,7 @@ export class PhotosController {
   @ApiOperation({ summary: 'Get a signed URL for a protected photo' })
   async getSignedUrl(@Param('id') id: string) {
     const photo = await this.photosService.findOne(id);
-    const metadata = photo.metadata as any;
+    const metadata = photo.metadata as { key?: string } | null;
     if (metadata && metadata.key) {
       const signedUrl = await this.storageService.getSignedUrl(metadata.key);
       return { signedUrl };
@@ -97,7 +105,7 @@ export class PhotosController {
   @ApiOperation({ summary: 'Delete a photo' })
   async remove(@Param('id') id: string, @GetUser('id') userId: string) {
     const photo = await this.photosService.findOne(id);
-    const metadata = photo.metadata as any;
+    const metadata = photo.metadata as { key?: string } | null;
     if (metadata && metadata.key) {
       await this.storageService.deleteFile(metadata.key);
     }

@@ -1,7 +1,10 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePhotoDto } from './dto/create-photo.dto';
-import { UpdatePhotoDto } from './dto/update-photo.dto';
 
 @Injectable()
 export class PhotosService {
@@ -24,7 +27,9 @@ export class PhotosService {
     }
 
     if (album.event.photographer.userId !== userId) {
-      throw new ForbiddenException('You do not have permission to manage photos in this album');
+      throw new ForbiddenException(
+        'You do not have permission to manage photos in this album',
+      );
     }
 
     return album;
@@ -78,7 +83,9 @@ export class PhotosService {
     }
 
     if (photo.album.event.photographer.userId !== userId) {
-      throw new ForbiddenException('You do not have permission to delete this photo');
+      throw new ForbiddenException(
+        'You do not have permission to delete this photo',
+      );
     }
 
     return this.prisma.photo.delete({

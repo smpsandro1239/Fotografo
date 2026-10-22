@@ -41,8 +41,9 @@ describe('PacksService', () => {
     it('should throw ForbiddenException if user is not a photographer', async () => {
       (prisma.photographer.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(service.create('user1', { name: 'Pack 1', price: 100 }))
-        .rejects.toThrow(ForbiddenException);
+      await expect(
+        service.create('user1', { name: 'Pack 1', price: 100 }),
+      ).rejects.toThrow(ForbiddenException);
     });
   });
 });

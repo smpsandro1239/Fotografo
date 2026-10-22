@@ -1,4 +1,8 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
@@ -18,7 +22,9 @@ export class AlbumsService {
     }
 
     if (event.photographer.userId !== userId) {
-      throw new ForbiddenException('You do not have permission to manage albums for this event');
+      throw new ForbiddenException(
+        'You do not have permission to manage albums for this event',
+      );
     }
 
     return event;

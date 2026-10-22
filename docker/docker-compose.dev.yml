@@ -1,0 +1,44 @@
+# Dev stack local do Fotografo — PostgreSQL 17 + backend NestJS
+# Uso: docker compose -f docker/docker-compose.dev.yml up -d postgres
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: fotografo-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: fotografo
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Backend corre fora do compose em dev (nest start --watch no host),
+  # mas pode ser orquestrado assim:
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: fotografo-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://postgres:password@postgres:5432/fotografo?schema=public
+      JWT_SECRET: dev-jwt-secret-change-me-0123456789abcdef
+      JWT_REFRESH_SECRET: dev-refresh-secret-change-me-0123456789abcdef
+      JWT_EXPIRES_IN: 1h
+      JWT_REFRESH_EXPIRES_IN: 7d
+      PORT: 3001
+      CORS_ORIGINS: http://localhost:3000
+    ports:
+      - '3001:3001'
+    profiles: ['full']
+
+volumes:
+  pgdata:
