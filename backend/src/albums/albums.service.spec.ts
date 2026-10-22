@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AlbumsService } from './albums.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { ForbiddenException, NotFoundException } from '@nestjs/common';
+import { ForbiddenException } from '@nestjs/common';
 
 describe('AlbumsService', () => {
   let service: AlbumsService;
@@ -54,9 +54,15 @@ describe('AlbumsService', () => {
         id: 'event1',
         photographer: { userId: 'user1' },
       });
-      (prisma.album.create as jest.Mock).mockResolvedValue({ id: 'album1', name: 'Album 1' });
+      (prisma.album.create as jest.Mock).mockResolvedValue({
+        id: 'album1',
+        name: 'Album 1',
+      });
 
-      const result = await service.create('user1', { name: 'Album 1', eventId: 'event1' });
+      const result = await service.create('user1', {
+        name: 'Album 1',
+        eventId: 'event1',
+      });
       expect(result).toEqual({ id: 'album1', name: 'Album 1' });
     });
   });

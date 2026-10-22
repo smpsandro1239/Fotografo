@@ -1,4 +1,8 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePackDto } from './dto/create-pack.dto';
 import { UpdatePackDto } from './dto/update-pack.dto';
@@ -42,7 +46,7 @@ export class PacksService {
     });
 
     if (!pack) {
-      throw new NotFoundException(\`Pack with ID \${id} not found\`);
+      throw new NotFoundException(`Pack with ID ${id} not found`);
     }
 
     return pack;
@@ -53,7 +57,9 @@ export class PacksService {
     const pack = await this.findOne(id);
 
     if (pack.photographerId !== photographer.id) {
-      throw new ForbiddenException('You do not have permission to update this pack');
+      throw new ForbiddenException(
+        'You do not have permission to update this pack',
+      );
     }
 
     return this.prisma.pack.update({
@@ -67,7 +73,9 @@ export class PacksService {
     const pack = await this.findOne(id);
 
     if (pack.photographerId !== photographer.id) {
-      throw new ForbiddenException('You do not have permission to delete this pack');
+      throw new ForbiddenException(
+        'You do not have permission to delete this pack',
+      );
     }
 
     return this.prisma.pack.delete({

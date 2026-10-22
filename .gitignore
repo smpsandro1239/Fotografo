@@ -1,7 +1,5 @@
-**/node_modules/
-**/dist/
-**/build/
-**/.next/
-**/.expo/
+node_modules/
 .env
+.env.local
+.env.*.local
 *.log

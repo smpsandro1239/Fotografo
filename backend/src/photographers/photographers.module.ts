@@ -4,6 +4,6 @@ import { PhotographersController } from './photographers.controller';
 
 @Module({
   providers: [PhotographersService],
-  controllers: [PhotographersController]
+  controllers: [PhotographersController],
 })
 export class PhotographersModule {}

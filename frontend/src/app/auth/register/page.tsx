@@ -1,0 +1,118 @@
+"use client";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import Link from "next/link";
+import toast from "react-hot-toast";
+import { Camera, Loader2 } from "lucide-react";
+import { useAuth } from "@/lib/auth-context";
+import { extractApiError } from "@/lib/api";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+// Schema de registo (espelha RegisterDto do backend: name, email, password)
+const registerSchema = z.object({
+  name: z.string().min(2, "O nome deve ter pelo menos 2 caracteres"),
+  email: z.email("Email inválido"),
+  password: z
+    .string()
+    .min(6, "A palavra-passe deve ter pelo menos 6 caracteres"),
+});
+
+type RegisterForm = z.infer<typeof registerSchema>;
+
+export default function RegisterPage() {
+  const { register: signup } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterForm>({ resolver: zodResolver(registerSchema) });
+
+  async function onSubmit(values: RegisterForm) {
+    try {
+      await signup(values);
+      toast.success("Conta criada com sucesso");
+    } catch (err) {
+      toast.error(extractApiError(err));
+    }
+  }
+
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-zinc-50 p-4 dark:bg-zinc-950">
+      <div className="w-full max-w-md rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+        <div className="mb-6 flex items-center gap-3">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900">
+            <Camera className="h-5 w-5" />
+          </span>
+          <div>
+            <h1 className="text-xl font-semibold">Criar conta</h1>
+            <p className="text-sm text-zinc-500">
+              Junte-se à plataforma premium para fotógrafos
+            </p>
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="name">Nome</Label>
+            <Input id="name" placeholder="O seu nome" {...register("name")} />
+            {errors.name && (
+              <p className="text-sm text-red-600">{errors.name.message}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="voce@exemplo.pt"
+              autoComplete="email"
+              {...register("email")}
+            />
+            {errors.email && (
+              <p className="text-sm text-red-600">{errors.email.message}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="password">Palavra-passe</Label>
+            <Input
+              id="password"
+              type="password"
+              placeholder="mínimo 6 caracteres"
+              autoComplete="new-password"
+              {...register("password")}
+            />
+            {errors.password && (
+              <p className="text-sm text-red-600">{errors.password.message}</p>
+            )}
+          </div>
+
+          <Button type="submit" className="w-full" disabled={isSubmitting}>
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> A criar conta…
+              </>
+            ) : (
+              "Criar conta"
+            )}
+          </Button>
+        </form>
+
+        <p className="mt-6 text-center text-sm text-zinc-500">
+          Já tem conta?{" "}
+          <Link
+            href="/auth/login"
+            className="font-medium text-zinc-900 underline-offset-4 hover:underline dark:text-zinc-100"
+          >
+            Entrar
+          </Link>
+        </p>
+      </div>
+    </main>
+  );
+}

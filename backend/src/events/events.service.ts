@@ -1,4 +1,9 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
@@ -77,6 +82,47 @@ export class EventsService {
 
     return this.prisma.event.delete({
       where: { id: event.id },
+    });
+  }
+
+  // Publica um evento na galeria pública.
+  // Regra de negócio: só pode ser publicado se tiver pelo menos 1 álbum.
+  async publish(id: string, userId: string) {
+    const event = await this.findOne(id, userId);
+
+    const albumCount = await this.prisma.album.count({
+      where: { eventId: event.id },
+    });
+
+    if (albumCount === 0) {
+      throw new BadRequestException(
+        'O evento não pode ser publicado sem pelo menos um álbum',
+      );
+    }
+
+    // Transição de estado: publicar um evento já publicado é erro.
+    if (event.isPublic) {
+      throw new BadRequestException('O evento já está publicado');
+    }
+
+    return this.prisma.event.update({
+      where: { id: event.id },
+      data: { isPublic: true },
+    });
+  }
+
+  // Remove a publicação do evento da galeria pública.
+  async unpublish(id: string, userId: string) {
+    const event = await this.findOne(id, userId);
+
+    // Transição de estado: despublicar um evento não publicado é erro.
+    if (!event.isPublic) {
+      throw new BadRequestException('O evento já está não-publicado');
+    }
+
+    return this.prisma.event.update({
+      where: { id: event.id },
+      data: { isPublic: false },
     });
   }
 

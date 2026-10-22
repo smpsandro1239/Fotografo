@@ -9,7 +9,12 @@ import {
   UseGuards,
   Query,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { PacksService } from './packs.service';
 import { CreatePackDto } from './dto/create-pack.dto';
 import { UpdatePackDto } from './dto/update-pack.dto';
@@ -25,7 +30,10 @@ export class PacksController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Create a new pack' })
-  @ApiResponse({ status: 201, description: 'The pack has been successfully created.' })
+  @ApiResponse({
+    status: 201,
+    description: 'The pack has been successfully created.',
+  })
   create(@GetUser('id') userId: string, @Body() createPackDto: CreatePackDto) {
     return this.packsService.create(userId, createPackDto);
   }
@@ -49,7 +57,10 @@ export class PacksController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Update a pack' })
-  @ApiResponse({ status: 200, description: 'The pack has been successfully updated.' })
+  @ApiResponse({
+    status: 200,
+    description: 'The pack has been successfully updated.',
+  })
   @ApiResponse({ status: 404, description: 'Pack not found.' })
   update(
     @Param('id') id: string,
@@ -63,7 +74,10 @@ export class PacksController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Delete a pack' })
-  @ApiResponse({ status: 200, description: 'The pack has been successfully deleted.' })
+  @ApiResponse({
+    status: 200,
+    description: 'The pack has been successfully deleted.',
+  })
   @ApiResponse({ status: 404, description: 'Pack not found.' })
   remove(@Param('id') id: string, @GetUser('id') userId: string) {
     return this.packsService.remove(id, userId);

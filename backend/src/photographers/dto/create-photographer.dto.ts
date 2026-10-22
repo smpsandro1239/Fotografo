@@ -2,7 +2,10 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString, IsUrl } from 'class-validator';
 
 export class CreatePhotographerDto {
-  @ApiProperty({ example: 'Especialista em casamentos e eventos corporativos.', required: false })
+  @ApiProperty({
+    example: 'Especialista em casamentos e eventos corporativos.',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   bio?: string;

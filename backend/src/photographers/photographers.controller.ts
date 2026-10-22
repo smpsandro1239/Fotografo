@@ -1,5 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, UseGuards, Request } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { PhotographersService } from './photographers.service';
 import { CreatePhotographerDto } from './dto/create-photographer.dto';
 import { UpdatePhotographerDto } from './dto/update-photographer.dto';
@@ -15,8 +29,14 @@ export class PhotographersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Register as a photographer' })
-  @ApiResponse({ status: 201, description: 'Successfully registered as a photographer' })
-  create(@GetUser('id') userId: string, @Body() createPhotographerDto: CreatePhotographerDto) {
+  @ApiResponse({
+    status: 201,
+    description: 'Successfully registered as a photographer',
+  })
+  create(
+    @GetUser('id') userId: string,
+    @Body() createPhotographerDto: CreatePhotographerDto,
+  ) {
     return this.photographersService.create(userId, createPhotographerDto);
   }
 
@@ -38,7 +58,10 @@ export class PhotographersController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Update current photographer profile' })
-  update(@GetUser('id') userId: string, @Body() updatePhotographerDto: UpdatePhotographerDto) {
+  update(
+    @GetUser('id') userId: string,
+    @Body() updatePhotographerDto: UpdatePhotographerDto,
+  ) {
     return this.photographersService.update(userId, updatePhotographerDto);
   }
 }

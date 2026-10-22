@@ -9,7 +9,12 @@ import {
   UseGuards,
   Query,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { AlbumsService } from './albums.service';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
@@ -25,16 +30,25 @@ export class AlbumsController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new album for an event' })
-  @ApiResponse({ status: 201, description: 'The album has been successfully created.' })
+  @ApiResponse({
+    status: 201,
+    description: 'The album has been successfully created.',
+  })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  create(@GetUser('id') userId: string, @Body() createAlbumDto: CreateAlbumDto) {
+  create(
+    @GetUser('id') userId: string,
+    @Body() createAlbumDto: CreateAlbumDto,
+  ) {
     return this.albumsService.create(userId, createAlbumDto);
   }
 
   @Get()
   @ApiOperation({ summary: 'Get all albums for a specific event' })
   @ApiResponse({ status: 200, description: 'Return all albums for the event.' })
-  findAllByEvent(@Query('eventId') eventId: string, @GetUser('id') userId: string) {
+  findAllByEvent(
+    @Query('eventId') eventId: string,
+    @GetUser('id') userId: string,
+  ) {
     return this.albumsService.findAllByEvent(eventId, userId);
   }
 
@@ -48,7 +62,10 @@ export class AlbumsController {
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update an album' })
-  @ApiResponse({ status: 200, description: 'The album has been successfully updated.' })
+  @ApiResponse({
+    status: 200,
+    description: 'The album has been successfully updated.',
+  })
   @ApiResponse({ status: 404, description: 'Album not found.' })
   update(
     @Param('id') id: string,
@@ -60,7 +77,10 @@ export class AlbumsController {
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete an album' })
-  @ApiResponse({ status: 200, description: 'The album has been successfully deleted.' })
+  @ApiResponse({
+    status: 200,
+    description: 'The album has been successfully deleted.',
+  })
   @ApiResponse({ status: 404, description: 'Album not found.' })
   remove(@Param('id') id: string, @GetUser('id') userId: string) {
     return this.albumsService.remove(id, userId);

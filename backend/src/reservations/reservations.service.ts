@@ -1,4 +1,8 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationStatusDto } from './dto/update-reservation-status.dto';
@@ -13,7 +17,9 @@ export class ReservationsService {
     });
 
     if (!event) {
-      throw new NotFoundException(\`Event with ID \${createReservationDto.eventId} not found\`);
+      throw new NotFoundException(
+        `Event with ID ${createReservationDto.eventId} not found`,
+      );
     }
 
     return this.prisma.reservation.create({
@@ -68,17 +74,26 @@ export class ReservationsService {
     });
 
     if (!reservation) {
-      throw new NotFoundException(\`Reservation with ID \${id} not found\`);
+      throw new NotFoundException(`Reservation with ID ${id} not found`);
     }
 
-    if (reservation.userId !== userId && reservation.event.photographer.userId !== userId) {
-      throw new ForbiddenException('You do not have access to this reservation');
+    if (
+      reservation.userId !== userId &&
+      reservation.event.photographer.userId !== userId
+    ) {
+      throw new ForbiddenException(
+        'You do not have access to this reservation',
+      );
     }
 
     return reservation;
   }
 
-  async updateStatus(id: string, userId: string, updateDto: UpdateReservationStatusDto) {
+  async updateStatus(
+    id: string,
+    userId: string,
+    updateDto: UpdateReservationStatusDto,
+  ) {
     const reservation = await this.findOne(id, userId);
 
     // Only photographer can change status to CONFIRMED
@@ -87,7 +102,9 @@ export class ReservationsService {
     });
 
     if (!photographer || reservation.event.photographerId !== photographer.id) {
-      throw new ForbiddenException('Only the event photographer can update the reservation status');
+      throw new ForbiddenException(
+        'Only the event photographer can update the reservation status',
+      );
     }
 
     return this.prisma.reservation.update({

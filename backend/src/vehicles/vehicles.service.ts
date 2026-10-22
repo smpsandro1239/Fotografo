@@ -1,4 +1,8 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
@@ -14,11 +18,13 @@ export class VehiclesService {
     });
 
     if (!pack) {
-      throw new NotFoundException(\`Pack with ID \${packId} not found\`);
+      throw new NotFoundException(`Pack with ID ${packId} not found`);
     }
 
     if (pack.photographer.userId !== userId) {
-      throw new ForbiddenException('You do not have permission to manage vehicles for this pack');
+      throw new ForbiddenException(
+        'You do not have permission to manage vehicles for this pack',
+      );
     }
 
     return pack;
@@ -44,7 +50,7 @@ export class VehiclesService {
     });
 
     if (!vehicle) {
-      throw new NotFoundException(\`Vehicle with ID \${id} not found\`);
+      throw new NotFoundException(`Vehicle with ID ${id} not found`);
     }
 
     return vehicle;
@@ -57,11 +63,13 @@ export class VehiclesService {
     });
 
     if (!vehicle) {
-      throw new NotFoundException(\`Vehicle with ID \${id} not found\`);
+      throw new NotFoundException(`Vehicle with ID ${id} not found`);
     }
 
     if (vehicle.pack.photographer.userId !== userId) {
-      throw new ForbiddenException('You do not have permission to update this vehicle');
+      throw new ForbiddenException(
+        'You do not have permission to update this vehicle',
+      );
     }
 
     // If changing packId, check ownership of the new pack
@@ -82,11 +90,13 @@ export class VehiclesService {
     });
 
     if (!vehicle) {
-      throw new NotFoundException(\`Vehicle with ID \${id} not found\`);
+      throw new NotFoundException(`Vehicle with ID ${id} not found`);
     }
 
     if (vehicle.pack.photographer.userId !== userId) {
-      throw new ForbiddenException('You do not have permission to delete this vehicle');
+      throw new ForbiddenException(
+        'You do not have permission to delete this vehicle',
+      );
     }
 
     return this.prisma.vehicle.delete({

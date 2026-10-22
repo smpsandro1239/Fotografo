@@ -1,5 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Schema Prisma — Plataforma Premium para Fotógrafos
+// 13 modelos + 7 enums · PostgreSQL 17
 
 generator client {
   provider = "prisma-client-js"
@@ -16,47 +16,96 @@ enum UserRole {
   CLIENT
 }
 
-model User {
-  id            String          @id @default(uuid())
-  email         String          @unique
-  password      String
-  name          String?
-  role          UserRole        @default(CLIENT)
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
 
-  photographer  Photographer?
-  reservations  Reservation[]
-  orders        Order[]
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  CANCELLED
+  SHIPPED
+}
+
+enum OrderItemType {
+  PHOTO
+  ALBUM
+  PACK
+  PRINT
+  DIGITAL_DOWNLOAD
+}
+
+enum PaymentStatus {
+  SUCCEEDED
+  PENDING
+  FAILED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+enum StatType {
+  VIEW
+  FAVORITE
+  DOWNLOAD
+  SHARE
+}
+
+enum NotificationType {
+  INFO
+  SUCCESS
+  WARNING
+  ERROR
+  RESERVATION_CONFIRMED
+  RESERVATION_CANCELLED
+  PAYMENT_SUCCEEDED
+  PAYMENT_FAILED
+  ORDER_CREATED
+  ORDER_COMPLETED
+  ORDER_SHIPPED
+  NEW_MESSAGE
+}
+
+model User {
+  id           String          @id @default(uuid())
+  email        String          @unique
+  password     String
+  name         String?
+  role         UserRole        @default(CLIENT)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  photographer Photographer?
+  reservations Reservation[]
+  orders       Order[]
   notifications Notification[]
 }
 
 model Photographer {
-  id          String   @id @default(uuid())
-  userId      String   @unique
-  user        User     @relation(fields: [userId], references: [id])
-  bio         String?
-  website     String?
-  portfolio   String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  events      Event[]
-  packs       Pack[]
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  bio       String?
+  website   String?
+  portfolio String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  events    Event[]
+  packs     Pack[]
 }
 
 model Event {
-  id             String       @id @default(uuid())
+  id             String          @id @default(uuid())
   photographerId String
-  photographer   Photographer @relation(fields: [photographerId], references: [id])
+  photographer   Photographer    @relation(fields: [photographerId], references: [id])
   name           String
   description    String?
   date           DateTime
   location       String?
-  isPublic       Boolean      @default(false)
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-
+  isPublic       Boolean         @default(false)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
   albums         Album[]
   reservations   Reservation[]
 }
@@ -64,23 +113,21 @@ model Event {
 model Album {
   id        String   @id @default(uuid())
   eventId   String
-  event     Event    @relation(fields: [eventId], references: [id])
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
   photos    Photo[]
 }
 
 model Photo {
   id        String   @id @default(uuid())
   albumId   String
-  album     Album    @relation(fields: [albumId], references: [id])
+  album     Album    @relation(fields: [albumId], references: [id], onDelete: Cascade)
   url       String
   thumbnail String?
   metadata  Json?
   createdAt DateTime @default(now())
-
   stats     Stat[]
 }
 
@@ -93,14 +140,13 @@ model Pack {
   description    String?
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
-
   vehicles       Vehicle[]
 }
 
 model Vehicle {
   id          String   @id @default(uuid())
   packId      String
-  pack        Pack     @relation(fields: [packId], references: [id])
+  pack        Pack     @relation(fields: [packId], references: [id], onDelete: Cascade)
   name        String
   description String?
   available   Boolean  @default(true)
@@ -117,14 +163,7 @@ model Reservation {
   status    ReservationStatus @default(PENDING)
   createdAt DateTime          @default(now())
   updatedAt DateTime          @updatedAt
-
   payment   Payment?
-}
-
-enum ReservationStatus {
-  PENDING
-  CONFIRMED
-  CANCELLED
 }
 
 model Order {
@@ -132,17 +171,22 @@ model Order {
   userId    String
   user      User        @relation(fields: [userId], references: [id])
   status    OrderStatus @default(PENDING)
-  total     Decimal
+  total     Decimal     @default(0)
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
-
   payment   Payment?
+  items     OrderItem[]
 }
 
-enum OrderStatus {
-  PENDING
-  COMPLETED
-  CANCELLED
+model OrderItem {
+  id        String        @id @default(uuid())
+  orderId   String
+  order     Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  type      OrderItemType
+  referenceId String?
+  name      String
+  price     Decimal
+  quantity  Int           @default(1)
 }
 
 model Payment {
@@ -153,30 +197,32 @@ model Payment {
   reservation   Reservation?  @relation(fields: [reservationId], references: [id])
   stripeId      String        @unique
   amount        Decimal
+  currency      String        @default("eur")
   status        PaymentStatus
   createdAt     DateTime      @default(now())
-}
-
-enum PaymentStatus {
-  SUCCEEDED
-  PENDING
-  FAILED
+  updatedAt     DateTime      @updatedAt
 }
 
 model Stat {
   id        String   @id @default(uuid())
   photoId   String
-  photo     Photo    @relation(fields: [photoId], references: [id])
-  type      String   // e.g., 'view', 'favorite'
+  photo     Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  type      StatType
   createdAt DateTime @default(now())
+
+  @@index([photoId, type])
 }
 
 model Notification {
-  id        String   @id @default(uuid())
+  id        String           @id @default(uuid())
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      NotificationType @default(INFO)
   title     String
   message   String
-  read      Boolean  @default(false)
-  createdAt DateTime @default(now())
+  data      Json?
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  @@index([userId, read])
 }
