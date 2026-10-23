@@ -61,9 +61,9 @@ export default function ReservationsPage() {
             {reservations?.length ? (
               reservations.map((r) => (
                 <TableRow key={r.id}>
-                  <TableCell className="font-medium">{r.name}</TableCell>
-                  <TableCell>{r.email}</TableCell>
-                  <TableCell>{new Date(r.date).toLocaleDateString("pt-PT")}</TableCell>
+                  <TableCell className="font-medium">{r.user?.name ?? "—"}</TableCell>
+                  <TableCell>{r.user?.email ?? "—"}</TableCell>
+                  <TableCell>{new Date(r.event?.date ?? r.createdAt).toLocaleDateString("pt-PT")}</TableCell>
                   <TableCell>
                     <Badge
                       variant={

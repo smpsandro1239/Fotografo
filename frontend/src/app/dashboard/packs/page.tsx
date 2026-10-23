@@ -72,10 +72,10 @@ export default function PacksPage() {
                 <TableRow key={pk.id}>
                   <TableCell className="font-medium">{pk.name}</TableCell>
                   <TableCell className="text-muted-foreground">{pk.description ?? "—"}</TableCell>
-                  <TableCell>{(pk.price / 100).toFixed(2)} €</TableCell>
+                  <TableCell>{(Number(pk.price) / 100).toFixed(2)} €</TableCell>
                   <TableCell>
-                    <Badge variant={pk.active ? "default" : "secondary"}>
-                      {pk.active ? "Ativo" : "Inativo"}
+                    <Badge variant={pk.description ? "default" : "secondary"}>
+                      {pk.description ? "Detalhado" : "Simples"}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right">

@@ -51,13 +51,16 @@ export interface Pack {
   description?: string | null;
   price: number;
   photographerId: string;
+  createdAt?: string;
 }
 
 export interface Vehicle {
   id: string;
+  packId: string;
   name: string;
+  description?: string | null;
   available: boolean;
-  packId?: string | null;
+  createdAt?: string;
 }
 
 export type ReservationStatus = "PENDING" | "CONFIRMED" | "CANCELLED";
@@ -67,8 +70,11 @@ export interface Reservation {
   userId: string;
   eventId: string;
   status: ReservationStatus;
-  date: string;
   createdAt: string;
+  updatedAt?: string;
+  // Campos incluídos pelo backend (reservations.service.ts)
+  user?: { name: string; email: string } | null;
+  event?: { id: string; name: string; date?: string } | null;
 }
 
 export type OrderStatus =
@@ -106,6 +112,7 @@ export interface AppNotification {
   type: NotificationType;
   message: string;
   read: boolean;
+  title?: string | null;
   data?: Record<string, unknown> | null;
   createdAt: string;
 }

@@ -51,7 +51,7 @@ export default function NotificationsPage() {
                     n.read ? "opacity-70" : "bg-muted/50"
                   }`}
                 >
-                  <p className="font-medium">{n.title}</p>
+                  <p className="font-medium">{n.title ?? "Notificação"}</p>
                   <p className="text-sm text-muted-foreground">{n.message}</p>
                   <p className="mt-1 text-xs text-muted-foreground">
                     {new Date(n.createdAt).toLocaleString("pt-PT")}

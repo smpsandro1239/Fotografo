@@ -17,29 +17,29 @@ import { Label } from "@/components/ui/label";
 import { extractApiError } from "@/lib/api";
 import { useVehicles, useCreateVehicle, useDeleteVehicle } from "@/hooks/use-api";
 
-// Gestão da frota de veículos (preço/hora em cêntimos)
+// Gestão da frota de veículos (schema do backend: packId, name, description, available)
 export default function VehiclesPage() {
   const { data: vehicles, isLoading } = useVehicles();
   const createVehicle = useCreateVehicle();
   const removeVehicle = useDeleteVehicle();
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", type: "", plate: "", pricePerHour: "" });
+  const [form, setForm] = useState({ name: "", packId: "", description: "" });
 
   async function onSubmit() {
-    if (!form.name || !form.type) {
-      toast.error("Nome e tipo são obrigatórios.");
+    if (!form.name || !form.packId) {
+      toast.error("Nome e pack são obrigatórios.");
       return;
     }
     try {
       await createVehicle.mutateAsync({
         name: form.name,
-        type: form.type,
-        plate: form.plate,
-        pricePerHour: Math.round(parseFloat(form.pricePerHour || "0") * 100),
+        packId: form.packId,
+        description: form.description || undefined,
+        available: true,
       });
       toast.success("Veículo criado com sucesso");
       setOpen(false);
-      setForm({ name: "", type: "", plate: "", pricePerHour: "" });
+      setForm({ name: "", packId: "", description: "" });
     } catch (err) {
       toast.error(extractApiError(err));
     }
@@ -61,9 +61,8 @@ export default function VehiclesPage() {
           <TableHeader>
             <TableRow>
               <TableHead>Nome</TableHead>
-              <TableHead>Tipo</TableHead>
-              <TableHead>Matrícula</TableHead>
-              <TableHead>Preço/hora</TableHead>
+              <TableHead>Descrição</TableHead>
+              <TableHead>Pack</TableHead>
               <TableHead>Estado</TableHead>
               <TableHead className="text-right">Ações</TableHead>
             </TableRow>
@@ -73,9 +72,8 @@ export default function VehiclesPage() {
               vehicles.map((v) => (
                 <TableRow key={v.id}>
                   <TableCell className="font-medium">{v.name}</TableCell>
-                  <TableCell>{v.type}</TableCell>
-                  <TableCell>{v.plate ?? "—"}</TableCell>
-                  <TableCell>{((v.pricePerHour ?? 0) / 100).toFixed(2)} €</TableCell>
+                  <TableCell>{v.description ?? "—"}</TableCell>
+                  <TableCell>{v.packId}</TableCell>
                   <TableCell>
                     <Badge variant={v.available ? "default" : "secondary"}>
                       {v.available ? "Disponível" : "Indisponível"}
@@ -102,7 +100,7 @@ export default function VehiclesPage() {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={6} className="text-center text-muted-foreground">
+                <TableCell colSpan={5} className="text-center text-muted-foreground">
                   Sem veículos registados.
                 </TableCell>
               </TableRow>
@@ -123,16 +121,12 @@ export default function VehiclesPage() {
               <Input id="vehicle-name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="vehicle-type">Tipo</Label>
-              <Input id="vehicle-type" value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} placeholder="Vintage, Luxo, Van…" />
+              <Label htmlFor="vehicle-pack">ID do Pack</Label>
+              <Input id="vehicle-pack" value={form.packId} onChange={(e) => setForm({ ...form, packId: e.target.value })} placeholder="UUID do pack associado" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="vehicle-plate">Matrícula</Label>
-              <Input id="vehicle-plate" value={form.plate} onChange={(e) => setForm({ ...form, plate: e.target.value })} />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="vehicle-price">Preço por hora (€)</Label>
-              <Input id="vehicle-price" type="number" min="0" step="0.01" value={form.pricePerHour} onChange={(e) => setForm({ ...form, pricePerHour: e.target.value })} />
+              <Label htmlFor="vehicle-description">Descrição</Label>
+              <Input id="vehicle-description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Ideal para sessões de recém-nascidos…" />
             </div>
             <Button onClick={onSubmit} disabled={createVehicle.isPending} className="w-full">
               {createVehicle.isPending ? "A criar…" : "Criar"}
