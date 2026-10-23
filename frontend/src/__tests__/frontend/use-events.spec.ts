@@ -12,7 +12,11 @@ vi.mock("@/lib/api", async (importOriginal) => {
   return { ...mod, api: { get: vi.fn(), post: vi.fn(), patch: vi.fn(), delete: vi.fn() } };
 });
 
-const mockedApi = vi.mocked(api);
+// O mock substitui `api` por um objecto de vi.fn() — tipamos como any para
+// aceder às APIs de mock (mockResolvedValue etc.) sem conflito com os tipos
+// do AxiosInstance real.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mockedApi = api as any;
 
 function wrapper({ children }: { children: ReactNode }) {
   const client = createTestQueryClient();
